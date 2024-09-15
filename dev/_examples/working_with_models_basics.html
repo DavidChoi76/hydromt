@@ -18,38 +18,38 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
     <link rel="stylesheet" type="text/css" href="../_static/theme-deltares.css?v=aa503ec8" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_examples/working_with_models_basics';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/Deltares/hydromt/gh-pages/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.9.5';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.10.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
         </script>
     <link rel="icon" href="../_static/hydromt-icon.svg"/>
@@ -66,27 +66,23 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -108,18 +104,25 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
-  </label>
+  </button>
   
   
   <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
 
+  
+    
   
 
 <a class="navbar-brand logo" href="../index.html">
@@ -146,43 +149,43 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-<nav class="navbar-nav">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../getting_started/intro.html">
-                        Getting started
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started/intro.html">
+    Getting started
+  </a>
+</li>
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="../user_guide/intro.html">
-                        User guide
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../api.html">
-                        API reference
-                      </a>
-                    </li>
-                
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide/intro.html">
+    User guide
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../dev/intro.html">
-                        Dev guide
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../plugins.html">
-                        Plugins
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev/intro.html">
+    Dev guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../plugins.html">
+    Plugins
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -196,7 +199,7 @@
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -206,7 +209,7 @@
         </div>
       
       
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+        <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -217,7 +220,7 @@
           
           
           
-          <a href="https://github.com/Deltares/hydromt" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="icon-link-image" alt="GitHub"/></a>
+          <a href="https://github.com/Deltares/hydromt" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="icon-link-image" alt="GitHub"/></a>
         </li>
         <li class="nav-item">
           
@@ -228,7 +231,7 @@
           
           
           
-          <a href="https://www.deltares.nl/en/" title="Deltares" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/deltares-blue.svg" class="icon-link-image" alt="Deltares"/></a>
+          <a href="https://www.deltares.nl/en/" title="Deltares" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/deltares-blue.svg" class="icon-link-image" alt="Deltares"/></a>
         </li>
 </ul></div>
       
@@ -238,7 +241,7 @@ document.write(`
   <div class="version-switcher__container dropdown">
     <button id="pst-version-switcher-button-2"
       type="button"
-      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
       data-bs-toggle="dropdown"
       aria-haspopup="listbox"
       aria-controls="pst-version-switcher-list-2"
@@ -265,7 +268,7 @@ document.write(`
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -276,9 +279,9 @@ document.write(`
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
       <span class="fa-solid fa-outdent"></span>
-    </label>
+    </button>
   
 </div>
 
@@ -299,46 +302,49 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item">
-<nav class="navbar-nav">
+          
+          
+            <div class="navbar-item">
+<nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../getting_started/intro.html">
-                        Getting started
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started/intro.html">
+    Getting started
+  </a>
+</li>
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="../user_guide/intro.html">
-                        User guide
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../api.html">
-                        API reference
-                      </a>
-                    </li>
-                
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide/intro.html">
+    User guide
+  </a>
+</li>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../dev/intro.html">
-                        Dev guide
-                      </a>
-                    </li>
-                
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../plugins.html">
-                        Plugins
-                      </a>
-                    </li>
-                
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev/intro.html">
+    Dev guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../plugins.html">
+    Plugins
+  </a>
+</li>
+
   </ul>
 </nav></div>
+          
         
       </div>
     
@@ -346,7 +352,7 @@ document.write(`
     
       <div class="sidebar-header-items__end">
         
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+          <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
           
@@ -357,7 +363,7 @@ document.write(`
           
           
           
-          <a href="https://github.com/Deltares/hydromt" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="icon-link-image" alt="GitHub"/></a>
+          <a href="https://github.com/Deltares/hydromt" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="icon-link-image" alt="GitHub"/></a>
         </li>
         <li class="nav-item">
           
@@ -368,7 +374,7 @@ document.write(`
           
           
           
-          <a href="https://www.deltares.nl/en/" title="Deltares" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/deltares-blue.svg" class="icon-link-image" alt="Deltares"/></a>
+          <a href="https://www.deltares.nl/en/" title="Deltares" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/deltares-blue.svg" class="icon-link-image" alt="Deltares"/></a>
         </li>
 </ul></div>
         
@@ -378,7 +384,7 @@ document.write(`
   <div class="version-switcher__container dropdown">
     <button id="pst-version-switcher-button-3"
       type="button"
-      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
       data-bs-toggle="dropdown"
       aria-haspopup="listbox"
       aria-controls="pst-version-switcher-list-3"
@@ -474,13 +480,13 @@ document.write(`
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -489,7 +495,7 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
@@ -547,7 +553,7 @@ document.write(`
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 model plugins:
-generic models (hydromt 0.9.5.dev0):
+generic models (hydromt 0.10.0.dev0):
  - grid_model
  - vector_model
  - mesh_model
@@ -623,51 +629,37 @@ Options:
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:25,585 - build - log - DEBUG - Writing log messages to new file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model/hydromt.log.
-2024-04-12 13:34:25,586 - build - log - INFO - HydroMT version: 0.9.5.dev0
-2024-04-12 13:34:25,586 - build - main - INFO - Building instance of grid_model model at /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model.
-2024-04-12 13:34:25,586 - build - main - INFO - User settings:
-2024-04-12 13:34:25,601 - build - model_api - INFO - Initializing grid_model model from hydromt (v0.9.5.dev0).
-2024-04-12 13:34:25,601 - build - model_api - INFO - setup_grid.region: {&#39;bbox&#39;: [11.7, 45.35, 12.95, 46.7]}
-2024-04-12 13:34:25,601 - build - model_api - INFO - setup_grid.res: 0.05
-2024-04-12 13:34:25,601 - build - model_api - INFO - setup_grid.crs: None
-2024-04-12 13:34:25,601 - build - model_api - INFO - setup_grid.rotated: False
-2024-04-12 13:34:25,601 - build - model_api - INFO - setup_grid.hydrography_fn: None
-2024-04-12 13:34:25,601 - build - model_api - INFO - setup_grid.basin_index_fn: None
-2024-04-12 13:34:25,601 - build - model_api - INFO - setup_grid.add_mask: True
-2024-04-12 13:34:25,601 - build - model_api - INFO - setup_grid.align: True
-2024-04-12 13:34:25,602 - build - model_api - INFO - setup_grid.dec_origin: 0
-2024-04-12 13:34:25,602 - build - model_api - INFO - setup_grid.dec_rotation: 3
-2024-04-12 13:34:25,602 - build - model_grid - INFO - Preparing 2D grid.
-2024-04-12 13:34:25,602 - build - basin_mask - DEBUG - Parsed region (kind=bbox): {&#39;bbox&#39;: [11.7, 45.35, 12.95, 46.7]}
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:25,612 - build - model_api - INFO - Writing model data to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model
-2024-04-12 13:34:25,613 - build - model_api - INFO - Writing model config to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model/model.ini
-2024-04-12 13:34:25,613 - build - model_api - ERROR - Default config file not found at grid_model/model.ini
-2024-04-12 13:34:25,613 - build - model_api - DEBUG - No maps data found, skip writing.
-2024-04-12 13:34:25,613 - build - model_api - DEBUG - Writing file grid/grid.nc
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-2024-04-12 13:34:25,722 - build - model_api - DEBUG - Writing file geoms/region.geojson
-2024-04-12 13:34:25,754 - build - model_api - DEBUG - No tables found, skip writing.
-2024-04-12 13:34:25,754 - build - model_api - DEBUG - No forcing data found, skip writing.
-2024-04-12 13:34:25,754 - build - model_api - DEBUG - No states data found, skip writing.
+2024-09-15 14:52:37,701 - build - log - DEBUG - Writing log messages to new file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model/hydromt.log.
+2024-09-15 14:52:37,701 - build - log - INFO - HydroMT version: 0.10.0.dev0
+2024-09-15 14:52:37,701 - build - main - INFO - Building instance of grid_model model at /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model.
+2024-09-15 14:52:37,701 - build - main - INFO - User settings:
+2024-09-15 14:52:37,712 - build - model_api - INFO - Initializing grid_model model from hydromt (v0.10.0.dev0).
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.region: {&#39;bbox&#39;: [11.7, 45.35, 12.95, 46.7]}
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.res: 0.05
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.crs: None
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.rotated: False
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.hydrography_fn: None
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.basin_index_fn: None
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.add_mask: True
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.align: True
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.dec_origin: 0
+2024-09-15 14:52:37,712 - build - model_api - INFO - setup_grid.dec_rotation: 3
+2024-09-15 14:52:37,713 - build - model_grid - INFO - Preparing 2D grid.
+2024-09-15 14:52:37,713 - build - basin_mask - DEBUG - Parsed region (kind=bbox): {&#39;bbox&#39;: [11.7, 45.35, 12.95, 46.7]}
+2024-09-15 14:52:37,724 - build - model_api - INFO - Writing model data to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model
+2024-09-15 14:52:37,724 - build - model_api - INFO - Writing model config to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model/model.ini
+2024-09-15 14:52:37,724 - build - model_api - ERROR - Default config file not found at grid_model/model.ini
+2024-09-15 14:52:37,724 - build - model_api - DEBUG - No maps data found, skip writing.
+2024-09-15 14:52:37,725 - build - model_api - DEBUG - Writing file grid/grid.nc
+2024-09-15 14:52:37,837 - build - model_api - DEBUG - Writing file geoms/region.geojson
+2024-09-15 14:52:37,840 - build - model_api - DEBUG - No tables found, skip writing.
+2024-09-15 14:52:37,840 - build - model_api - DEBUG - No forcing data found, skip writing.
+2024-09-15 14:52:37,840 - build - model_api - DEBUG - No states data found, skip writing.
 
 </pre></div></div>
 </div>
@@ -820,180 +812,103 @@ write:
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,206 - build - log - DEBUG - Writing log messages to new file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/hydromt.log.
-2024-04-12 13:34:28,206 - build - log - INFO - HydroMT version: 0.9.5.dev0
-2024-04-12 13:34:28,206 - build - main - INFO - Building instance of grid_model model at /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1.
-2024-04-12 13:34:28,206 - build - main - INFO - User settings:
-2024-04-12 13:34:28,245 - build - data_catalog - INFO - Reading data catalog archive artifact_data v0.0.8
-2024-04-12 13:34:28,246 - build - data_catalog - INFO - Parsing data catalog from /home/runner/.hydromt_data/artifact_data/v0.0.8/data_catalog.yml
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,287 - build - data_catalog - INFO - Parsing data catalog from data/vito_reclass.yml
-2024-04-12 13:34:28,288 - build - model_api - INFO - Initializing grid_model model from hydromt (v0.9.5.dev0).
-2024-04-12 13:34:28,289 - build - model_api - DEBUG - Setting model config options.
-2024-04-12 13:34:28,289 - build - model_api - ERROR - Default config file not found at grid_model/model.ini
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.region: {&#39;bbox&#39;: [11.7, 45.35, 12.95, 46.7]}
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.res: 0.05
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.crs: 4326
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.rotated: False
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.hydrography_fn: merit_hydro
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.basin_index_fn: merit_hydro_index
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.add_mask: True
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.align: True
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.dec_origin: 0
-2024-04-12 13:34:28,289 - build - model_api - INFO - setup_grid.dec_rotation: 3
-2024-04-12 13:34:28,289 - build - model_grid - INFO - Preparing 2D grid.
-2024-04-12 13:34:28,289 - build - basin_mask - DEBUG - Parsed region (kind=bbox): {&#39;bbox&#39;: [11.7, 45.35, 12.95, 46.7]}
-2024-04-12 13:34:28,301 - build - model_api - INFO - setup_grid_from_constant.constant: 0.01
-2024-04-12 13:34:28,301 - build - model_api - INFO - setup_grid_from_constant.name: c1
-2024-04-12 13:34:28,301 - build - model_api - INFO - setup_grid_from_constant.dtype: float32
-2024-04-12 13:34:28,301 - build - model_api - INFO - setup_grid_from_constant.nodata: -99.0
-2024-04-12 13:34:28,301 - build - model_api - INFO - setup_grid_from_constant.mask_name: mask
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,306 - build - model_api - INFO - setup_grid_from_rasterdataset.raster_fn: merit_hydro_1k
-2024-04-12 13:34:28,306 - build - model_api - INFO - setup_grid_from_rasterdataset.variables: [&#39;elevtn&#39;, &#39;basins&#39;]
-2024-04-12 13:34:28,306 - build - model_api - INFO - setup_grid_from_rasterdataset.fill_method: None
-2024-04-12 13:34:28,306 - build - model_api - INFO - setup_grid_from_rasterdataset.reproject_method: [&#39;average&#39;, &#39;mode&#39;]
-2024-04-12 13:34:28,306 - build - model_api - INFO - setup_grid_from_rasterdataset.mask_name: mask
-2024-04-12 13:34:28,306 - build - model_api - INFO - setup_grid_from_rasterdataset.rename: None
-2024-04-12 13:34:28,306 - build - model_grid - INFO - Preparing grid data from raster source merit_hydro_1k
-2024-04-12 13:34:28,307 - build - rasterdataset - INFO - Reading merit_hydro_1k raster data from /home/runner/.hydromt_data/artifact_data/v0.0.8/merit_hydro_1k/{variable}.tif
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,357 - build - rasterdataset - DEBUG - Clip to [11.700, 45.350, 12.950, 46.700] (epsg:4326))
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,520 - build - model_api - INFO - setup_grid_from_rasterdataset.raster_fn: vito
-2024-04-12 13:34:28,520 - build - model_api - INFO - setup_grid_from_rasterdataset.variables: None
-2024-04-12 13:34:28,520 - build - model_api - INFO - setup_grid_from_rasterdataset.fill_method: nearest
-2024-04-12 13:34:28,520 - build - model_api - INFO - setup_grid_from_rasterdataset.reproject_method: mode
-2024-04-12 13:34:28,520 - build - model_api - INFO - setup_grid_from_rasterdataset.mask_name: mask
-2024-04-12 13:34:28,520 - build - model_api - INFO - setup_grid_from_rasterdataset.rename: {&#39;vito&#39;: &#39;landuse&#39;}
-2024-04-12 13:34:28,520 - build - model_grid - INFO - Preparing grid data from raster source vito
-2024-04-12 13:34:28,521 - build - rasterdataset - INFO - Reading vito raster data from /home/runner/.hydromt_data/artifact_data/v0.0.8/vito.tif
-2024-04-12 13:34:28,534 - build - rasterdataset - DEBUG - Clip to [11.700, 45.350, 12.950, 46.700] (epsg:4326))
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,574 - build - model_api - INFO - setup_grid_from_raster_reclass.raster_fn: vito
-2024-04-12 13:34:28,574 - build - model_api - INFO - setup_grid_from_raster_reclass.reclass_table_fn: vito_reclass
-2024-04-12 13:34:28,575 - build - model_api - INFO - setup_grid_from_raster_reclass.reclass_variables: [&#39;manning&#39;]
-2024-04-12 13:34:28,575 - build - model_api - INFO - setup_grid_from_raster_reclass.variable: None
-2024-04-12 13:34:28,575 - build - model_api - INFO - setup_grid_from_raster_reclass.fill_method: None
-2024-04-12 13:34:28,575 - build - model_api - INFO - setup_grid_from_raster_reclass.reproject_method: [&#39;average&#39;]
-2024-04-12 13:34:28,575 - build - model_api - INFO - setup_grid_from_raster_reclass.mask_name: mask
-2024-04-12 13:34:28,575 - build - model_api - INFO - setup_grid_from_raster_reclass.rename: None
-2024-04-12 13:34:28,575 - build - model_grid - INFO - Preparing grid data by reclassifying the data in vito based on vito_reclass
-2024-04-12 13:34:28,575 - build - rasterdataset - INFO - Reading vito raster data from /home/runner/.hydromt_data/artifact_data/v0.0.8/vito.tif
-2024-04-12 13:34:28,588 - build - rasterdataset - DEBUG - Clip to [11.700, 45.350, 12.950, 46.700] (epsg:4326))
-2024-04-12 13:34:28,589 - build - dataframe - INFO - Reading vito_reclass csv data from /home/runner/work/hydromt/hydromt/docs/_examples/data/vito_reclass.csv
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,785 - build - model_api - INFO - setup_grid_from_geodataframe.vector_fn: hydro_lakes
-2024-04-12 13:34:28,785 - build - model_api - INFO - setup_grid_from_geodataframe.variables: [&#39;waterbody_id&#39;, &#39;Depth_avg&#39;]
-2024-04-12 13:34:28,785 - build - model_api - INFO - setup_grid_from_geodataframe.nodata: [-1, -999.0]
-2024-04-12 13:34:28,785 - build - model_api - INFO - setup_grid_from_geodataframe.rasterize_method: value
-2024-04-12 13:34:28,785 - build - model_api - INFO - setup_grid_from_geodataframe.mask_name: mask
-2024-04-12 13:34:28,785 - build - model_api - INFO - setup_grid_from_geodataframe.rename: {&#39;waterbody_id&#39;: &#39;lake_id&#39;, &#39;Detph_avg&#39;: &#39;lake_depth&#39;}
-2024-04-12 13:34:28,785 - build - model_api - INFO - setup_grid_from_geodataframe.all_touched: True
-2024-04-12 13:34:28,785 - build - model_grid - INFO - Preparing grid data from vector &#39;hydro_lakes&#39;.
-2024-04-12 13:34:28,787 - build - geodataframe - INFO - Reading hydro_lakes vector data from /home/runner/.hydromt_data/artifact_data/v0.0.8/hydro_lakes.gpkg
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,833 - build - geodataframe - DEBUG - Clip intersects [11.700, 45.350, 12.950, 46.700] (EPSG:4326)
-2024-04-12 13:34:28,833 - build - geodataframe - DEBUG - Convert units for 1 columns.
-2024-04-12 13:34:28,848 - build - model_api - INFO - setup_grid_from_geodataframe.vector_fn: hydro_lakes
-2024-04-12 13:34:28,848 - build - model_api - INFO - setup_grid_from_geodataframe.variables: None
-2024-04-12 13:34:28,848 - build - model_api - INFO - setup_grid_from_geodataframe.nodata: -1
-2024-04-12 13:34:28,848 - build - model_api - INFO - setup_grid_from_geodataframe.rasterize_method: fraction
-2024-04-12 13:34:28,848 - build - model_api - INFO - setup_grid_from_geodataframe.mask_name: mask
-2024-04-12 13:34:28,848 - build - model_api - INFO - setup_grid_from_geodataframe.rename: {&#39;hydro_lakes&#39;: &#39;water_frac&#39;}
-2024-04-12 13:34:28,848 - build - model_api - INFO - setup_grid_from_geodataframe.all_touched: True
-2024-04-12 13:34:28,848 - build - model_grid - INFO - Preparing grid data from vector &#39;hydro_lakes&#39;.
-2024-04-12 13:34:28,849 - build - geodataframe - INFO - Reading hydro_lakes vector data from /home/runner/.hydromt_data/artifact_data/v0.0.8/hydro_lakes.gpkg
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,876 - build - geodataframe - DEBUG - Clip intersects [11.700, 45.350, 12.950, 46.700] (EPSG:4326)
-2024-04-12 13:34:28,876 - build - geodataframe - DEBUG - Convert units for 1 columns.
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:28,915 - build - model_api - INFO - write.components: [&#39;config&#39;, &#39;geoms&#39;, &#39;grid&#39;]
-2024-04-12 13:34:28,915 - build - model_api - INFO - Writing model data to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1
-2024-04-12 13:34:28,915 - build - model_api - INFO - Writing model config to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/model.ini
-2024-04-12 13:34:28,915 - build - model_api - DEBUG - Writing file geoms/region.geojson
-2024-04-12 13:34:28,919 - build - model_api - DEBUG - Writing file grid/grid.nc
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:29,116 - build - model_api - INFO - Writing model data to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1
-2024-04-12 13:34:29,116 - build - model_api - INFO - Writing model config to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/model.ini
-2024-04-12 13:34:29,116 - build - model_api - DEBUG - No maps data found, skip writing.
-2024-04-12 13:34:29,116 - build - model_api - DEBUG - Writing file grid/grid.nc
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-2024-04-12 13:34:29,304 - build - model_api - DEBUG - Writing file geoms/region.geojson
-2024-04-12 13:34:29,308 - build - model_api - DEBUG - No tables found, skip writing.
-2024-04-12 13:34:29,308 - build - model_api - DEBUG - No forcing data found, skip writing.
-2024-04-12 13:34:29,308 - build - model_api - DEBUG - No states data found, skip writing.
+2024-09-15 14:52:40,285 - build - log - DEBUG - Writing log messages to new file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/hydromt.log.
+2024-09-15 14:52:40,285 - build - log - INFO - HydroMT version: 0.10.0.dev0
+2024-09-15 14:52:40,285 - build - main - INFO - Building instance of grid_model model at /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1.
+2024-09-15 14:52:40,285 - build - main - INFO - User settings:
+2024-09-15 14:52:40,324 - build - data_catalog - INFO - Reading data catalog artifact_data latest
+2024-09-15 14:52:40,324 - build - data_catalog - INFO - Parsing data catalog from /home/runner/.hydromt_data/artifact_data/v0.0.9/data_catalog.yml
+2024-09-15 14:52:40,914 - build - data_catalog - INFO - Parsing data catalog from data/vito_reclass.yml
+2024-09-15 14:52:40,915 - build - model_api - INFO - Initializing grid_model model from hydromt (v0.10.0.dev0).
+2024-09-15 14:52:40,915 - build - model_api - DEBUG - Setting model config options.
+2024-09-15 14:52:40,915 - build - model_api - ERROR - Default config file not found at grid_model/model.ini
+2024-09-15 14:52:40,915 - build - model_api - INFO - setup_grid.region: {&#39;bbox&#39;: [11.7, 45.35, 12.95, 46.7]}
+2024-09-15 14:52:40,915 - build - model_api - INFO - setup_grid.res: 0.05
+2024-09-15 14:52:40,915 - build - model_api - INFO - setup_grid.crs: 4326
+2024-09-15 14:52:40,915 - build - model_api - INFO - setup_grid.rotated: False
+2024-09-15 14:52:40,915 - build - model_api - INFO - setup_grid.hydrography_fn: merit_hydro
+2024-09-15 14:52:40,915 - build - model_api - INFO - setup_grid.basin_index_fn: merit_hydro_index
+2024-09-15 14:52:40,915 - build - model_api - INFO - setup_grid.add_mask: True
+2024-09-15 14:52:40,915 - build - model_api - INFO - setup_grid.align: True
+2024-09-15 14:52:40,916 - build - model_api - INFO - setup_grid.dec_origin: 0
+2024-09-15 14:52:40,916 - build - model_api - INFO - setup_grid.dec_rotation: 3
+2024-09-15 14:52:40,916 - build - model_grid - INFO - Preparing 2D grid.
+2024-09-15 14:52:40,916 - build - basin_mask - DEBUG - Parsed region (kind=bbox): {&#39;bbox&#39;: [11.7, 45.35, 12.95, 46.7]}
+2024-09-15 14:52:40,929 - build - model_api - INFO - setup_grid_from_constant.constant: 0.01
+2024-09-15 14:52:40,929 - build - model_api - INFO - setup_grid_from_constant.name: c1
+2024-09-15 14:52:40,929 - build - model_api - INFO - setup_grid_from_constant.dtype: float32
+2024-09-15 14:52:40,929 - build - model_api - INFO - setup_grid_from_constant.nodata: -99.0
+2024-09-15 14:52:40,929 - build - model_api - INFO - setup_grid_from_constant.mask_name: mask
+2024-09-15 14:52:40,934 - build - model_api - INFO - setup_grid_from_rasterdataset.raster_fn: merit_hydro_1k
+2024-09-15 14:52:40,934 - build - model_api - INFO - setup_grid_from_rasterdataset.variables: [&#39;elevtn&#39;, &#39;basins&#39;]
+2024-09-15 14:52:40,934 - build - model_api - INFO - setup_grid_from_rasterdataset.fill_method: None
+2024-09-15 14:52:40,934 - build - model_api - INFO - setup_grid_from_rasterdataset.reproject_method: [&#39;average&#39;, &#39;mode&#39;]
+2024-09-15 14:52:40,934 - build - model_api - INFO - setup_grid_from_rasterdataset.mask_name: mask
+2024-09-15 14:52:40,934 - build - model_api - INFO - setup_grid_from_rasterdataset.rename: None
+2024-09-15 14:52:40,934 - build - model_grid - INFO - Preparing grid data from raster source merit_hydro_1k
+2024-09-15 14:52:40,935 - build - rasterdataset - INFO - Reading merit_hydro_1k raster data from /home/runner/.hydromt_data/artifact_data/v0.0.9/data.tar/merit_hydro_1k/{variable}.tif
+2024-09-15 14:52:40,982 - build - rasterdataset - DEBUG - Clip to [11.700, 45.350, 12.950, 46.700] (epsg:4326))
+2024-09-15 14:52:41,151 - build - model_api - INFO - setup_grid_from_rasterdataset.raster_fn: vito
+2024-09-15 14:52:41,151 - build - model_api - INFO - setup_grid_from_rasterdataset.variables: None
+2024-09-15 14:52:41,151 - build - model_api - INFO - setup_grid_from_rasterdataset.fill_method: nearest
+2024-09-15 14:52:41,151 - build - model_api - INFO - setup_grid_from_rasterdataset.reproject_method: mode
+2024-09-15 14:52:41,151 - build - model_api - INFO - setup_grid_from_rasterdataset.mask_name: mask
+2024-09-15 14:52:41,151 - build - model_api - INFO - setup_grid_from_rasterdataset.rename: {&#39;vito&#39;: &#39;landuse&#39;}
+2024-09-15 14:52:41,151 - build - model_grid - INFO - Preparing grid data from raster source vito
+2024-09-15 14:52:41,152 - build - rasterdataset - INFO - Reading vito raster data from /home/runner/.hydromt_data/artifact_data/v0.0.9/data.tar/vito.tif
+2024-09-15 14:52:41,165 - build - rasterdataset - DEBUG - Clip to [11.700, 45.350, 12.950, 46.700] (epsg:4326))
+2024-09-15 14:52:41,205 - build - model_api - INFO - setup_grid_from_raster_reclass.raster_fn: vito
+2024-09-15 14:52:41,205 - build - model_api - INFO - setup_grid_from_raster_reclass.reclass_table_fn: vito_reclass
+2024-09-15 14:52:41,205 - build - model_api - INFO - setup_grid_from_raster_reclass.reclass_variables: [&#39;manning&#39;]
+2024-09-15 14:52:41,205 - build - model_api - INFO - setup_grid_from_raster_reclass.variable: None
+2024-09-15 14:52:41,205 - build - model_api - INFO - setup_grid_from_raster_reclass.fill_method: None
+2024-09-15 14:52:41,205 - build - model_api - INFO - setup_grid_from_raster_reclass.reproject_method: [&#39;average&#39;]
+2024-09-15 14:52:41,205 - build - model_api - INFO - setup_grid_from_raster_reclass.mask_name: mask
+2024-09-15 14:52:41,205 - build - model_api - INFO - setup_grid_from_raster_reclass.rename: None
+2024-09-15 14:52:41,205 - build - model_grid - INFO - Preparing grid data by reclassifying the data in vito based on vito_reclass
+2024-09-15 14:52:41,206 - build - rasterdataset - INFO - Reading vito raster data from /home/runner/.hydromt_data/artifact_data/v0.0.9/data.tar/vito.tif
+2024-09-15 14:52:41,219 - build - rasterdataset - DEBUG - Clip to [11.700, 45.350, 12.950, 46.700] (epsg:4326))
+2024-09-15 14:52:41,220 - build - dataframe - INFO - Reading vito_reclass csv data from /home/runner/work/hydromt/hydromt/docs/_examples/data/vito_reclass.csv
+2024-09-15 14:52:41,427 - build - model_api - INFO - setup_grid_from_geodataframe.vector_fn: hydro_lakes
+2024-09-15 14:52:41,427 - build - model_api - INFO - setup_grid_from_geodataframe.variables: [&#39;waterbody_id&#39;, &#39;Depth_avg&#39;]
+2024-09-15 14:52:41,427 - build - model_api - INFO - setup_grid_from_geodataframe.nodata: [-1, -999.0]
+2024-09-15 14:52:41,427 - build - model_api - INFO - setup_grid_from_geodataframe.rasterize_method: value
+2024-09-15 14:52:41,427 - build - model_api - INFO - setup_grid_from_geodataframe.mask_name: mask
+2024-09-15 14:52:41,427 - build - model_api - INFO - setup_grid_from_geodataframe.rename: {&#39;waterbody_id&#39;: &#39;lake_id&#39;, &#39;Detph_avg&#39;: &#39;lake_depth&#39;}
+2024-09-15 14:52:41,427 - build - model_api - INFO - setup_grid_from_geodataframe.all_touched: True
+2024-09-15 14:52:41,427 - build - model_grid - INFO - Preparing grid data from vector &#39;hydro_lakes&#39;.
+2024-09-15 14:52:41,428 - build - geodataframe - INFO - Reading hydro_lakes vector data from /home/runner/.hydromt_data/artifact_data/v0.0.9/data.tar/hydro_lakes.gpkg
+2024-09-15 14:52:41,441 - build - geodataframe - DEBUG - Clip intersects [11.700, 45.350, 12.950, 46.700] (EPSG:4326)
+2024-09-15 14:52:41,441 - build - geodataframe - DEBUG - Convert units for 1 columns.
+2024-09-15 14:52:41,456 - build - model_api - INFO - setup_grid_from_geodataframe.vector_fn: hydro_lakes
+2024-09-15 14:52:41,456 - build - model_api - INFO - setup_grid_from_geodataframe.variables: None
+2024-09-15 14:52:41,456 - build - model_api - INFO - setup_grid_from_geodataframe.nodata: -1
+2024-09-15 14:52:41,456 - build - model_api - INFO - setup_grid_from_geodataframe.rasterize_method: fraction
+2024-09-15 14:52:41,456 - build - model_api - INFO - setup_grid_from_geodataframe.mask_name: mask
+2024-09-15 14:52:41,457 - build - model_api - INFO - setup_grid_from_geodataframe.rename: {&#39;hydro_lakes&#39;: &#39;water_frac&#39;}
+2024-09-15 14:52:41,457 - build - model_api - INFO - setup_grid_from_geodataframe.all_touched: True
+2024-09-15 14:52:41,457 - build - model_grid - INFO - Preparing grid data from vector &#39;hydro_lakes&#39;.
+2024-09-15 14:52:41,458 - build - geodataframe - INFO - Reading hydro_lakes vector data from /home/runner/.hydromt_data/artifact_data/v0.0.9/data.tar/hydro_lakes.gpkg
+2024-09-15 14:52:41,468 - build - geodataframe - DEBUG - Clip intersects [11.700, 45.350, 12.950, 46.700] (EPSG:4326)
+2024-09-15 14:52:41,469 - build - geodataframe - DEBUG - Convert units for 1 columns.
+2024-09-15 14:52:41,505 - build - model_api - INFO - write.components: [&#39;config&#39;, &#39;geoms&#39;, &#39;grid&#39;]
+2024-09-15 14:52:41,506 - build - model_api - INFO - Writing model data to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1
+2024-09-15 14:52:41,506 - build - model_api - INFO - Writing model config to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/model.ini
+2024-09-15 14:52:41,506 - build - model_api - DEBUG - Writing file geoms/region.geojson
+2024-09-15 14:52:41,508 - build - model_api - DEBUG - Writing file grid/grid.nc
+2024-09-15 14:52:41,711 - build - model_api - INFO - Writing model data to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1
+2024-09-15 14:52:41,712 - build - model_api - INFO - Writing model config to /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/model.ini
+2024-09-15 14:52:41,712 - build - model_api - DEBUG - No maps data found, skip writing.
+2024-09-15 14:52:41,712 - build - model_api - DEBUG - Writing file grid/grid.nc
+2024-09-15 14:52:41,921 - build - model_api - DEBUG - Writing file geoms/region.geojson
+2024-09-15 14:52:41,923 - build - model_api - DEBUG - No tables found, skip writing.
+2024-09-15 14:52:41,923 - build - model_api - DEBUG - No forcing data found, skip writing.
+2024-09-15 14:52:41,923 - build - model_api - DEBUG - No states data found, skip writing.
 
 </pre></div></div>
 </div>
@@ -1093,7 +1008,7 @@ Variables available in grid.nc: [&#39;mask&#39;, &#39;c1&#39;, &#39;elevtn&#39;,
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.collections.QuadMesh at 0x7f149338ff50&gt;
+&lt;matplotlib.collections.QuadMesh at 0x7f33b15b8390&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1191,75 +1106,40 @@ Writing ./tmp_grid_model1/grid_model_update.yaml
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:35,296 - update - log - DEBUG - Writing log messages to new file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1_update/hydromt.log.
-2024-04-12 13:34:35,296 - update - log - INFO - HydroMT version: 0.9.5.dev0
-2024-04-12 13:34:35,296 - update - main - INFO - Updating grid_model model at /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1 (r).
-2024-04-12 13:34:35,296 - update - main - INFO - Output dir: /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1_update
-2024-04-12 13:34:35,296 - update - main - INFO - User settings:
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:35,332 - update - data_catalog - INFO - Reading data catalog archive artifact_data v0.0.8
-2024-04-12 13:34:35,332 - update - data_catalog - INFO - Parsing data catalog from /home/runner/.hydromt_data/artifact_data/v0.0.8/data_catalog.yml
-2024-04-12 13:34:35,375 - update - log - DEBUG - Appending log messages to file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/hydromt.log.
-2024-04-12 13:34:35,375 - update - model_api - INFO - Initializing grid_model model from hydromt (v0.9.5.dev0).
-2024-04-12 13:34:35,375 - update - model_api - INFO - Reading model data from /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1
-2024-04-12 13:34:35,375 - update - model_api - DEBUG - Model config read from /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/model.ini
-2024-04-12 13:34:35,376 - update - model_api - DEBUG - Reading model file grid.
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:35,419 - update - model_api - DEBUG - Reading model file region.
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:35,448 - update - model_api - INFO - Reading model table files.
-2024-04-12 13:34:35,449 - update - log - DEBUG - Appending log messages to file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1_update/hydromt.log.
-2024-04-12 13:34:35,449 - update - model_api - INFO - setup_grid_from_rasterdataset.raster_fn: merit_hydro_1k
-2024-04-12 13:34:35,449 - update - model_api - INFO - setup_grid_from_rasterdataset.variables: uparea
-2024-04-12 13:34:35,450 - update - model_api - INFO - setup_grid_from_rasterdataset.fill_method: None
-2024-04-12 13:34:35,450 - update - model_api - INFO - setup_grid_from_rasterdataset.reproject_method: max
-2024-04-12 13:34:35,450 - update - model_api - INFO - setup_grid_from_rasterdataset.mask_name: mask
-2024-04-12 13:34:35,450 - update - model_api - INFO - setup_grid_from_rasterdataset.rename: None
-2024-04-12 13:34:35,450 - update - model_grid - INFO - Preparing grid data from raster source merit_hydro_1k
-2024-04-12 13:34:35,451 - update - rasterdataset - INFO - Reading merit_hydro_1k raster data from /home/runner/.hydromt_data/artifact_data/v0.0.8/merit_hydro_1k/{variable}.tif
-2024-04-12 13:34:35,467 - update - rasterdataset - DEBUG - Clip to [11.700, 45.350, 12.950, 46.700] (epsg:4326))
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2024-04-12 13:34:35,620 - update - model_api - INFO - write_grid.fn: grid/grid.nc
-2024-04-12 13:34:35,621 - update - model_api - INFO - write_grid.gdal_compliant: False
-2024-04-12 13:34:35,621 - update - model_api - INFO - write_grid.rename_dims: False
-2024-04-12 13:34:35,621 - update - model_api - INFO - write_grid.force_sn: False
-2024-04-12 13:34:35,621 - update - model_api - DEBUG - Writing file grid/grid.nc
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
+2024-09-15 14:52:47,948 - update - log - DEBUG - Writing log messages to new file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1_update/hydromt.log.
+2024-09-15 14:52:47,948 - update - log - INFO - HydroMT version: 0.10.0.dev0
+2024-09-15 14:52:47,948 - update - main - INFO - Updating grid_model model at /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1 (r).
+2024-09-15 14:52:47,948 - update - main - INFO - Output dir: /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1_update
+2024-09-15 14:52:47,948 - update - main - INFO - User settings:
+2024-09-15 14:52:47,982 - update - data_catalog - INFO - Reading data catalog artifact_data latest
+2024-09-15 14:52:47,982 - update - data_catalog - INFO - Parsing data catalog from /home/runner/.hydromt_data/artifact_data/v0.0.9/data_catalog.yml
+2024-09-15 14:52:48,571 - update - log - DEBUG - Appending log messages to file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/hydromt.log.
+2024-09-15 14:52:48,571 - update - model_api - INFO - Initializing grid_model model from hydromt (v0.10.0.dev0).
+2024-09-15 14:52:48,571 - update - model_api - INFO - Reading model data from /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1
+2024-09-15 14:52:48,572 - update - model_api - DEBUG - Model config read from /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1/model.ini
+2024-09-15 14:52:48,572 - update - model_api - DEBUG - Reading model file grid.
+2024-09-15 14:52:48,607 - update - model_api - DEBUG - Reading model file region.
+2024-09-15 14:52:48,617 - update - model_api - INFO - Reading model table files.
+2024-09-15 14:52:48,617 - update - log - DEBUG - Appending log messages to file /home/runner/work/hydromt/hydromt/docs/_examples/tmp_grid_model1_update/hydromt.log.
+2024-09-15 14:52:48,618 - update - model_api - INFO - setup_grid_from_rasterdataset.raster_fn: merit_hydro_1k
+2024-09-15 14:52:48,618 - update - model_api - INFO - setup_grid_from_rasterdataset.variables: uparea
+2024-09-15 14:52:48,618 - update - model_api - INFO - setup_grid_from_rasterdataset.fill_method: None
+2024-09-15 14:52:48,618 - update - model_api - INFO - setup_grid_from_rasterdataset.reproject_method: max
+2024-09-15 14:52:48,618 - update - model_api - INFO - setup_grid_from_rasterdataset.mask_name: mask
+2024-09-15 14:52:48,618 - update - model_api - INFO - setup_grid_from_rasterdataset.rename: None
+2024-09-15 14:52:48,618 - update - model_grid - INFO - Preparing grid data from raster source merit_hydro_1k
+2024-09-15 14:52:48,619 - update - rasterdataset - INFO - Reading merit_hydro_1k raster data from /home/runner/.hydromt_data/artifact_data/v0.0.9/data.tar/merit_hydro_1k/{variable}.tif
+2024-09-15 14:52:48,637 - update - rasterdataset - DEBUG - Clip to [11.700, 45.350, 12.950, 46.700] (epsg:4326))
+2024-09-15 14:52:48,793 - update - model_api - INFO - write_grid.fn: grid/grid.nc
+2024-09-15 14:52:48,793 - update - model_api - INFO - write_grid.gdal_compliant: False
+2024-09-15 14:52:48,793 - update - model_api - INFO - write_grid.rename_dims: False
+2024-09-15 14:52:48,793 - update - model_api - INFO - write_grid.force_sn: False
+2024-09-15 14:52:48,793 - update - model_api - DEBUG - Writing file grid/grid.nc
 
 </pre></div></div>
 </div>
@@ -1301,7 +1181,7 @@ tmp_grid_model1_update/grid
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1383,8 +1263,8 @@ tmp_grid_model1_update/grid
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1404,7 +1284,7 @@ tmp_grid_model1_update/grid
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     <br/>
   </p>
 </div>
@@ -1417,7 +1297,7 @@ tmp_grid_model1_update/grid
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
 </p></div>
       
     </div>

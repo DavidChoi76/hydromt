@@ -15,8 +15,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -26,37 +26,38 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/theme-deltares.css?v=aa503ec8" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/hydromt/data_catalog/data_catalog';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.16.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/Deltares/hydromt/gh-pages/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.0.1';
-        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.1.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
         </script>
     <link rel="icon" href="../../../_static/hydromt-icon.svg"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="1.0.1.dev0" />
+  <meta name="docsearch:version" content="1.1.0.dev0" />
   </head>
   
   
@@ -173,7 +174,9 @@
 </li>
 
             <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
                     More
                 </button>
                 <ul id="pst-nav-more-links" class="dropdown-menu">
@@ -399,9 +402,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -450,17 +458,17 @@
   <h1>Source code for hydromt.data_catalog.data_catalog</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;DataCatalog module for HydroMT.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">inspect</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">abspath</span><span class="p">,</span> <span class="n">basename</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">exists</span><span class="p">,</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span><span class="p">,</span> <span class="n">splitext</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">abspath</span><span class="p">,</span> <span class="n">basename</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">exists</span><span class="p">,</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">join</span><span class="p">,</span> <span class="n">splitext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Any</span><span class="p">,</span>
     <span class="n">Dict</span><span class="p">,</span>
     <span class="n">Iterator</span><span class="p">,</span>
@@ -468,45 +476,44 @@
     <span class="n">Optional</span><span class="p">,</span>
     <span class="n">Set</span><span class="p">,</span>
     <span class="n">Tuple</span><span class="p">,</span>
-    <span class="n">Type</span><span class="p">,</span>
     <span class="n">Union</span><span class="p">,</span>
     <span class="n">cast</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">dateutil.parser</span>
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">pooch</span>
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-<span class="kn">import</span> <span class="nn">yaml</span>
-<span class="kn">from</span> <span class="nn">packaging.specifiers</span> <span class="kn">import</span> <span class="n">SpecifierSet</span>
-<span class="kn">from</span> <span class="nn">packaging.version</span> <span class="kn">import</span> <span class="n">Version</span>
-<span class="kn">from</span> <span class="nn">pystac</span> <span class="kn">import</span> <span class="n">Catalog</span> <span class="k">as</span> <span class="n">StacCatalog</span>
-<span class="kn">from</span> <span class="nn">pystac</span> <span class="kn">import</span> <span class="n">CatalogType</span><span class="p">,</span> <span class="n">MediaType</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dateutil.parser</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">packaging.specifiers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SpecifierSet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">packaging.version</span><span class="w"> </span><span class="kn">import</span> <span class="n">Version</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pystac</span><span class="w"> </span><span class="kn">import</span> <span class="n">Catalog</span> <span class="k">as</span> <span class="n">StacCatalog</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pystac</span><span class="w"> </span><span class="kn">import</span> <span class="n">CatalogType</span><span class="p">,</span> <span class="n">MediaType</span>
 
-<span class="kn">from</span> <span class="nn">hydromt</span> <span class="kn">import</span> <span class="n">__version__</span>
-<span class="kn">from</span> <span class="nn">hydromt._io.readers</span> <span class="kn">import</span> <span class="n">_yml_from_uri_or_path</span>
-<span class="kn">from</span> <span class="nn">hydromt._typing</span> <span class="kn">import</span> <span class="n">Bbox</span><span class="p">,</span> <span class="n">SourceSpecDict</span><span class="p">,</span> <span class="n">StrPath</span><span class="p">,</span> <span class="n">TimeRange</span>
-<span class="kn">from</span> <span class="nn">hydromt._typing.error</span> <span class="kn">import</span> <span class="n">NoDataException</span><span class="p">,</span> <span class="n">NoDataStrategy</span><span class="p">,</span> <span class="n">exec_nodata_strat</span>
-<span class="kn">from</span> <span class="nn">hydromt._utils</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt</span><span class="w"> </span><span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt._io.readers</span><span class="w"> </span><span class="kn">import</span> <span class="n">_yml_from_uri_or_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt._typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Bbox</span><span class="p">,</span> <span class="n">SourceSpecDict</span><span class="p">,</span> <span class="n">StrPath</span><span class="p">,</span> <span class="n">TimeRange</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt._typing.error</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoDataException</span><span class="p">,</span> <span class="n">NoDataStrategy</span><span class="p">,</span> <span class="n">exec_nodata_strat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt._utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">_deep_merge</span><span class="p">,</span>
     <span class="n">_partition_dictionaries</span><span class="p">,</span>
     <span class="n">_single_var_as_array</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">hydromt.config</span> <span class="kn">import</span> <span class="n">SETTINGS</span>
-<span class="kn">from</span> <span class="nn">hydromt.data_catalog.adapters</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">SETTINGS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.data_catalog.adapters</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DataFrameAdapter</span><span class="p">,</span>
     <span class="n">DatasetAdapter</span><span class="p">,</span>
     <span class="n">GeoDataFrameAdapter</span><span class="p">,</span>
     <span class="n">GeoDatasetAdapter</span><span class="p">,</span>
     <span class="n">RasterDatasetAdapter</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">hydromt.data_catalog.predefined_catalog</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.data_catalog.predefined_catalog</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">PredefinedCatalog</span><span class="p">,</span>
     <span class="n">_copy_file</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">hydromt.data_catalog.sources</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.data_catalog.sources</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DataFrameSource</span><span class="p">,</span>
     <span class="n">DatasetSource</span><span class="p">,</span>
     <span class="n">DataSource</span><span class="p">,</span>
@@ -515,17 +522,19 @@
     <span class="n">RasterDatasetSource</span><span class="p">,</span>
     <span class="n">create_source</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">hydromt.gis._gis_utils</span> <span class="kn">import</span> <span class="n">_parse_geom_bbox_buffer</span>
-<span class="kn">from</span> <span class="nn">hydromt.plugins</span> <span class="kn">import</span> <span class="n">PLUGINS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.gis._gis_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_parse_geom_bbox_buffer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">PLUGINS</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DataCatalog&quot;</span><span class="p">]</span>
 
+<span class="n">_NO_DATA_AFTER_SLICE_MSG</span> <span class="o">=</span> <span class="s2">&quot;No data was left after slicing.&quot;</span>
+
 
 <div class="viewcode-block" id="DataCatalog">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.html#hydromt.data_catalog.DataCatalog">[docs]</a>
-<span class="k">class</span> <span class="nc">DataCatalog</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataCatalog</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for the data catalog object.&quot;&quot;&quot;</span>
 
     <span class="n">_format_version</span> <span class="o">=</span> <span class="s2">&quot;v1&quot;</span>  <span class="c1"># format version of the data catalog</span>
@@ -533,7 +542,7 @@
 
 <div class="viewcode-block" id="DataCatalog.__init__">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.html#hydromt.data_catalog.DataCatalog.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data_libs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">fallback_lib</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;artifact_data&quot;</span><span class="p">,</span>
@@ -547,10 +556,10 @@
 
 <span class="sd">        Arguments</span>
 <span class="sd">        ---------</span>
-<span class="sd">        data_libs: (list of) str, Path, optional</span>
+<span class="sd">        data_libs: List[str], str, Path, optional</span>
 <span class="sd">            One or more paths to data catalog configuration files or names of predefined</span>
 <span class="sd">            data catalogs. By default the data catalog is initiated without data</span>
-<span class="sd">            entries. See :py:func:`~hydromt.data_catalog.adapters.DataCatalog.from_yml` for</span>
+<span class="sd">            entries. See :py:func:`~hydromt.data_catalog.DataCatalog.from_yml` for</span>
 <span class="sd">            accepted yaml format.</span>
 <span class="sd">        fallback_lib:</span>
 <span class="sd">            Name of pre-defined data catalog to read if no data_libs are provided,</span>
@@ -590,22 +599,22 @@
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">sources</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataSource</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sources</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataSource</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns dictionary of DataSources.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sources</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fallback_lib</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># read artifacts by default if no catalogs are provided</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">from_predefined_catalogs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fallback_lib</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sources</span>
 
-    <span class="k">def</span> <span class="nf">get_source_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_source_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of all available data source names.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sources</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">to_stac_catalog</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_stac_catalog</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">root</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-        <span class="n">source_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">meta</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">meta</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">catalog_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hydromt-stac-catalog&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;The stac catalog of hydromt&quot;</span><span class="p">,</span>
         <span class="n">used_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -641,10 +650,9 @@
         <span class="n">stac_catalog</span><span class="o">.</span><span class="n">normalize_and_save</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">catalog_type</span><span class="o">=</span><span class="n">catalog_type</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">stac_catalog</span>
 
-    <span class="k">def</span> <span class="nf">from_stac_catalog</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_stac_catalog</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">stac_like</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">StacCatalog</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span>
-        <span class="n">handle_nodata</span><span class="p">:</span> <span class="n">NoDataStrategy</span> <span class="o">=</span> <span class="n">NoDataStrategy</span><span class="o">.</span><span class="n">IGNORE</span><span class="p">,</span>
+        <span class="n">stac_like</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">StacCatalog</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write data catalog to STAC format.</span>
 
@@ -675,27 +683,38 @@
                     <span class="n">MediaType</span><span class="o">.</span><span class="n">COG</span><span class="p">,</span>
                     <span class="n">MediaType</span><span class="o">.</span><span class="n">TIFF</span><span class="p">,</span>
                 <span class="p">]:</span>
-                    <span class="n">Source</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">DataSource</span><span class="p">]</span> <span class="o">=</span> <span class="n">RasterDatasetSource</span>
+                    <span class="n">source</span><span class="p">:</span> <span class="n">RasterDatasetSource</span> <span class="o">=</span> <span class="n">RasterDatasetSource</span><span class="p">(</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">source_name</span><span class="p">,</span>
+                        <span class="n">uri</span><span class="o">=</span><span class="n">asset</span><span class="o">.</span><span class="n">get_absolute_href</span><span class="p">(),</span>
+                        <span class="n">driver</span><span class="o">=</span><span class="n">RasterDatasetSource</span><span class="o">.</span><span class="n">_fallback_driver_read</span><span class="p">,</span>
+                    <span class="p">)</span>
                 <span class="k">elif</span> <span class="n">asset</span><span class="o">.</span><span class="n">media_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">MediaType</span><span class="o">.</span><span class="n">GEOPACKAGE</span><span class="p">,</span> <span class="n">MediaType</span><span class="o">.</span><span class="n">FLATGEOBUF</span><span class="p">]:</span>
-                    <span class="n">Source</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">DataSource</span><span class="p">]</span> <span class="o">=</span> <span class="n">GeoDataFrameSource</span>
+                    <span class="n">source</span><span class="p">:</span> <span class="n">GeoDataFrameSource</span> <span class="o">=</span> <span class="n">GeoDataFrameSource</span><span class="p">(</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">source_name</span><span class="p">,</span>
+                        <span class="n">uri</span><span class="o">=</span><span class="n">asset</span><span class="o">.</span><span class="n">get_absolute_href</span><span class="p">(),</span>
+                        <span class="n">driver</span><span class="o">=</span><span class="n">GeoDataFrameSource</span><span class="o">.</span><span class="n">_fallback_driver_read</span><span class="p">,</span>
+                    <span class="p">)</span>
                 <span class="k">elif</span> <span class="n">asset</span><span class="o">.</span><span class="n">media_type</span> <span class="o">==</span> <span class="n">MediaType</span><span class="o">.</span><span class="n">GEOJSON</span><span class="p">:</span>
-                    <span class="n">Source</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">DataSource</span><span class="p">]</span> <span class="o">=</span> <span class="n">GeoDatasetSource</span>
+                    <span class="n">source</span><span class="p">:</span> <span class="n">GeoDatasetSource</span> <span class="o">=</span> <span class="n">GeoDatasetSource</span><span class="p">(</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">source_name</span><span class="p">,</span>
+                        <span class="n">uri</span><span class="o">=</span><span class="n">asset</span><span class="o">.</span><span class="n">get_absolute_href</span><span class="p">(),</span>
+                        <span class="n">driver</span><span class="o">=</span><span class="n">GeoDatasetSource</span><span class="o">.</span><span class="n">_fallback_driver_read</span><span class="p">,</span>
+                    <span class="p">)</span>
                 <span class="k">elif</span> <span class="n">asset</span><span class="o">.</span><span class="n">media_type</span> <span class="o">==</span> <span class="n">MediaType</span><span class="o">.</span><span class="n">JSON</span><span class="p">:</span>
-                    <span class="n">Source</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">DataSource</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataFrameSource</span>
+                    <span class="n">source</span><span class="p">:</span> <span class="n">DataFrameSource</span> <span class="o">=</span> <span class="n">DataFrameSource</span><span class="p">(</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">source_name</span><span class="p">,</span>
+                        <span class="n">uri</span><span class="o">=</span><span class="n">asset</span><span class="o">.</span><span class="n">get_absolute_href</span><span class="p">(),</span>
+                        <span class="n">driver</span><span class="o">=</span><span class="n">DataFrameSource</span><span class="o">.</span><span class="n">_fallback_driver_read</span><span class="p">,</span>
+                    <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">continue</span>
 
-                <span class="n">source</span><span class="p">:</span> <span class="n">DataSource</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span>
-                    <span class="n">name</span><span class="o">=</span><span class="n">source_name</span><span class="p">,</span>
-                    <span class="n">uri</span><span class="o">=</span><span class="n">asset</span><span class="o">.</span><span class="n">get_absolute_href</span><span class="p">(),</span>
-                    <span class="n">driver</span><span class="o">=</span><span class="n">Source</span><span class="o">.</span><span class="n">_fallback_driver_read</span><span class="p">,</span>
-                <span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">source_name</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">predefined_catalogs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predefined_catalogs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all predefined catalogs.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_catalogs</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_set_predefined_catalogs</span><span class="p">()</span>
@@ -703,7 +722,7 @@
 
 <div class="viewcode-block" id="DataCatalog.get_source_bbox">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.get_source_bbox.html#hydromt.data_catalog.DataCatalog.get_source_bbox">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_source_bbox</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_source_bbox</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -752,7 +771,7 @@
 
 <div class="viewcode-block" id="DataCatalog.get_source_time_range">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.get_source_time_range.html#hydromt.data_catalog.DataCatalog.get_source_time_range">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_source_time_range</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_source_time_range</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -799,7 +818,7 @@
 
 <div class="viewcode-block" id="DataCatalog.get_source">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.get_source.html#hydromt.data_catalog.DataCatalog.get_source">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_source</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_source</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -875,7 +894,7 @@
 
 <div class="viewcode-block" id="DataCatalog.add_source">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.add_source.html#hydromt.data_catalog.DataCatalog.add_source">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">DataSource</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">DataSource</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a new data source to the data catalog.</span>
 
 <span class="sd">        The data version and provider are extracted from the DataSource object.</span>
@@ -931,7 +950,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_sources</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">provider</span><span class="p">]</span> <span class="o">=</span> <span class="n">versions</span></div>
 
 
-    <span class="k">def</span> <span class="nf">list_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">used_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataSource</span><span class="p">]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">used_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataSource</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a flat list of all available data sources.</span>
 
 <span class="sd">        Parameters</span>
@@ -949,11 +968,11 @@
 
         <span class="k">return</span> <span class="n">sources</span>
 
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataSource</span><span class="p">]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataSource</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Iterate over sources.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_sources</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">contains_source</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contains_source</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -998,15 +1017,15 @@
 
             <span class="k">return</span> <span class="n">provider</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sources</span><span class="p">[</span><span class="n">source</span><span class="p">][</span><span class="n">selected_version</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return number of sources.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_sources</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Prettyprint the sources.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">False</span>
@@ -1023,22 +1042,22 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">def</span> <span class="nf">_repr_html_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_repr_html_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">_repr_html_</span><span class="p">()</span>
 
 <div class="viewcode-block" id="DataCatalog.update">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.update.html#hydromt.data_catalog.DataCatalog.update">[docs]</a>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add data sources to library or update them.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">update_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add data sources to library or update them.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_set_predefined_catalogs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_predefined_catalogs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set initialized predefined catalogs to _catalogs attribute.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">PLUGINS</span><span class="o">.</span><span class="n">catalog_plugins</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_catalogs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">cat</span><span class="p">(</span>
@@ -1048,7 +1067,7 @@
 
 <div class="viewcode-block" id="DataCatalog.from_predefined_catalogs">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.from_predefined_catalogs.html#hydromt.data_catalog.DataCatalog.from_predefined_catalogs">[docs]</a>
-    <span class="k">def</span> <span class="nf">from_predefined_catalogs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_predefined_catalogs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add data sources from a predefined data catalog.</span>
 
 <span class="sd">        Parameters</span>
@@ -1072,13 +1091,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">from_yml</span><span class="p">(</span><span class="n">catalog_path</span><span class="p">,</span> <span class="n">catalog_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">catalog_version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_cache_archive</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_cache_archive</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">archive_uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;latest&quot;</span><span class="p">,</span>
         <span class="n">sha256</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Cache a data archive to the cache directory.</span>
 
 <span class="sd">        The archive is unpacked and cached to &lt;cache_dir&gt;/&lt;name&gt;/&lt;version&gt;</span>
@@ -1120,7 +1139,7 @@
 
 <div class="viewcode-block" id="DataCatalog.from_yml">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.from_yml.html#hydromt.data_catalog.DataCatalog.from_yml">[docs]</a>
-    <span class="k">def</span> <span class="nf">from_yml</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_yml</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
         <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StrPath</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1211,7 +1230,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_is_compatible</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_compatible</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">hydromt_version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">requested_range</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">allow_prerelease</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">requested_range</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1224,9 +1243,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">requested</span>
 
-    <span class="k">def</span> <span class="nf">_determine_catalog_root</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">urlpath</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StrPath</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_determine_catalog_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">meta</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine which of the roots provided in meta exists and should be used.&quot;&quot;&quot;</span>
         <span class="n">root</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">to_check</span> <span class="o">=</span> <span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;roots&quot;</span><span class="p">,</span> <span class="p">[])</span>
@@ -1244,7 +1261,7 @@
 
 <div class="viewcode-block" id="DataCatalog.from_dict">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.from_dict.html#hydromt.data_catalog.DataCatalog.from_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
         <span class="n">catalog_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -1348,7 +1365,7 @@
 
 <div class="viewcode-block" id="DataCatalog.to_yml">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.to_yml.html#hydromt.data_catalog.DataCatalog.to_yml">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_yml</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_yml</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
         <span class="n">root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>
@@ -1393,7 +1410,7 @@
 
 <div class="viewcode-block" id="DataCatalog.to_dict">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.to_dict.html#hydromt.data_catalog.DataCatalog.to_dict">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">source_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StrPath</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1471,7 +1488,7 @@
         <span class="k">return</span> <span class="n">sources_out</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_to_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return data catalog summary as DataFrame.&quot;&quot;&quot;</span>
         <span class="n">source_names</span> <span class="o">=</span> <span class="n">source_names</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1493,7 +1510,7 @@
 
 <div class="viewcode-block" id="DataCatalog.export_data">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.export_data.html#hydromt.data_catalog.DataCatalog.export_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">export_data</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">new_root</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
         <span class="n">bbox</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bbox</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1683,7 +1700,7 @@
 
 <div class="viewcode-block" id="DataCatalog.get_rasterdataset">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.get_rasterdataset.html#hydromt.data_catalog.DataCatalog.get_rasterdataset">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_rasterdataset</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_rasterdataset</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data_like</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
             <span class="nb">str</span><span class="p">,</span> <span class="n">SourceSpecDict</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">,</span> <span class="n">RasterDatasetSource</span>
@@ -1798,7 +1815,7 @@
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">data_like</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">exec_nodata_strat</span><span class="p">(</span>
-                    <span class="s2">&quot;No data was left after slicing.&quot;</span><span class="p">,</span>
+                    <span class="n">_NO_DATA_AFTER_SLICE_MSG</span><span class="p">,</span>
                     <span class="n">strategy</span><span class="o">=</span><span class="n">handle_nodata</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">return</span> <span class="n">_single_var_as_array</span><span class="p">(</span>
@@ -1825,7 +1842,7 @@
 
 <div class="viewcode-block" id="DataCatalog.get_geodataframe">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.get_geodataframe.html#hydromt.data_catalog.DataCatalog.get_geodataframe">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_geodataframe</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_geodataframe</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data_like</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
             <span class="nb">str</span><span class="p">,</span> <span class="n">SourceSpecDict</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">,</span> <span class="n">GeoDataFrameSource</span>
@@ -1924,7 +1941,7 @@
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">data_like</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">exec_nodata_strat</span><span class="p">(</span>
-                    <span class="s2">&quot;No data was left after slicing.&quot;</span><span class="p">,</span>
+                    <span class="n">_NO_DATA_AFTER_SLICE_MSG</span><span class="p">,</span>
                     <span class="n">strategy</span><span class="o">=</span><span class="n">handle_nodata</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">return</span> <span class="n">data_like</span>
@@ -1944,7 +1961,7 @@
 
 <div class="viewcode-block" id="DataCatalog.get_geodataset">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.get_geodataset.html#hydromt.data_catalog.DataCatalog.get_geodataset">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_geodataset</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_geodataset</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data_like</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
             <span class="nb">str</span><span class="p">,</span> <span class="n">SourceSpecDict</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">,</span> <span class="n">GeoDatasetSource</span>
@@ -2063,7 +2080,7 @@
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">data_like</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">exec_nodata_strat</span><span class="p">(</span>
-                    <span class="s2">&quot;No data was left after slicing.&quot;</span><span class="p">,</span>
+                    <span class="n">_NO_DATA_AFTER_SLICE_MSG</span><span class="p">,</span>
                     <span class="n">strategy</span><span class="o">=</span><span class="n">handle_nodata</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">return</span> <span class="n">_single_var_as_array</span><span class="p">(</span><span class="n">data_like</span><span class="p">,</span> <span class="n">single_var_as_array</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
@@ -2084,7 +2101,7 @@
 
 <div class="viewcode-block" id="DataCatalog.get_dataset">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.get_dataset.html#hydromt.data_catalog.DataCatalog.get_dataset">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_dataset</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_dataset</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data_like</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
             <span class="nb">str</span><span class="p">,</span> <span class="n">SourceSpecDict</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">,</span> <span class="n">DatasetSource</span>
@@ -2170,7 +2187,7 @@
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">data_like</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">exec_nodata_strat</span><span class="p">(</span>
-                    <span class="s2">&quot;No data was left after slicing.&quot;</span><span class="p">,</span>
+                    <span class="n">_NO_DATA_AFTER_SLICE_MSG</span><span class="p">,</span>
                     <span class="n">strategy</span><span class="o">=</span><span class="n">handle_nodata</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">return</span> <span class="n">_single_var_as_array</span><span class="p">(</span><span class="n">data_like</span><span class="p">,</span> <span class="n">single_var_as_array</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
@@ -2187,7 +2204,7 @@
 
 <div class="viewcode-block" id="DataCatalog.get_dataframe">
 <a class="viewcode-back" href="../../../_generated/hydromt.data_catalog.DataCatalog.get_dataframe.html#hydromt.data_catalog.DataCatalog.get_dataframe">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_dataframe</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_dataframe</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data_like</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SourceSpecDict</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">DataFrameSource</span><span class="p">],</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2257,14 +2274,14 @@
                 <span class="p">)</span>
                 <span class="n">name</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">data_like</span><span class="p">)</span>
                 <span class="n">source</span> <span class="o">=</span> <span class="n">DataFrameSource</span><span class="p">(</span>
-                    <span class="n">uri</span><span class="o">=</span><span class="n">data_like</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+                    <span class="n">uri</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">data_like</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
                 <span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_like</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
             <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrameAdapter</span><span class="o">.</span><span class="n">_slice_data</span><span class="p">(</span><span class="n">data_like</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">time_range</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">exec_nodata_strat</span><span class="p">(</span>
-                    <span class="s2">&quot;No data was left after slicing.&quot;</span><span class="p">,</span>
+                    <span class="n">_NO_DATA_AFTER_SLICE_MSG</span><span class="p">,</span>
                     <span class="n">strategy</span><span class="o">=</span><span class="n">handle_nodata</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">return</span> <span class="n">df</span>
@@ -2281,7 +2298,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_parse_data_like_dict</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_data_like_dict</span><span class="p">(</span>
     <span class="n">data_like</span><span class="p">:</span> <span class="n">SourceSpecDict</span><span class="p">,</span>
     <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2298,7 +2315,7 @@
     <span class="k">return</span> <span class="n">source</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">version</span>
 
 
-<span class="k">def</span> <span class="nf">_parse_data_source_dict</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_data_source_dict</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">data_source_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
     <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2321,22 +2338,10 @@
 
     <span class="n">source</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta</span>
 
-    <span class="c1"># driver arguments</span>
-    <span class="c1"># driver_kwargs = source.pop(&quot;driver_kwargs&quot;, source.pop(&quot;kwargs&quot;, {}))</span>
-    <span class="c1"># TODO: remove code under this depending on subclasses</span>
-    <span class="c1">#       The DataCatalog should not have specific implementations for different drivers</span>
-    <span class="c1"># for driver_kwarg in driver_kwargs:</span>
-    <span class="c1">#     # required for geodataset where driver_kwargs can be a path</span>
-    <span class="c1">#     if &quot;fn&quot; in driver_kwarg:</span>
-    <span class="c1">#         driver_kwargs.update(</span>
-    <span class="c1">#             {driver_kwarg: abs_path(root, driver_kwargs[driver_kwarg])}</span>
-    <span class="c1">#         )</span>
-    <span class="c1"># source[&quot;driver_kwargs&quot;] = driver_kwargs</span>
-
     <span class="k">return</span> <span class="n">create_source</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_process_dict</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_process_dict</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Recursively change dict values to keep only python literal structures.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">_check_key</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
@@ -2347,7 +2352,7 @@
     <span class="k">return</span> <span class="n">d</span>
 
 
-<span class="k">def</span> <span class="nf">_denormalise_data_dict</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_denormalise_data_dict</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a flat list of with data name, dictionary of input data_dict.</span>
 
 <span class="sd">    Expand possible versions and variants in data_dict.</span>
@@ -2372,7 +2377,6 @@
                 <span class="n">name_copy</span> <span class="o">=</span> <span class="n">name</span>
                 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">combination</span><span class="p">):</span>
                     <span class="n">name_copy</span> <span class="o">=</span> <span class="n">name_copy</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{&quot;</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-                    <span class="c1"># TODO: seems like the job for a URIResolver?</span>
                     <span class="n">source_copy</span><span class="p">[</span><span class="s2">&quot;uri&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">source_copy</span><span class="p">[</span><span class="s2">&quot;uri&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{&quot;</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
                 <span class="n">data_dicts</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">name_copy</span><span class="p">:</span> <span class="n">source_copy</span><span class="p">})</span>
         <span class="k">else</span><span class="p">:</span>
@@ -2393,7 +2397,7 @@
     <span class="k">return</span> <span class="n">data_list</span>
 
 
-<span class="k">def</span> <span class="nf">_parse_time_range</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_time_range</span><span class="p">(</span>
     <span class="n">time_range</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">datetime</span><span class="p">],</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TimeRange</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse timerange with strings to datetime.&quot;&quot;&quot;</span>
@@ -2429,8 +2433,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2450,7 +2454,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     <br/>
   </p>
 </div>
@@ -2463,7 +2467,8 @@
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

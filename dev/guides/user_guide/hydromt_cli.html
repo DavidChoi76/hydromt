@@ -41,7 +41,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -49,7 +49,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/Deltares/hydromt/gh-pages/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.1.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.2.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -60,7 +60,7 @@
     <link rel="prev" title="Overview data" href="data_overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="1.1.0.dev0" />
+  <meta name="docsearch:version" content="1.2.0.dev0" />
   </head>
   
   
@@ -561,7 +561,7 @@ region, the data catalog, and other options. The most important ones are:</p>
 <li><p><cite>-d, --data</cite>: Relative or absolute path to the local yaml data catalog file or name of a predefined data catalog. The data catalog is a yaml file that contains the paths to the data that will be used to build the model.</p></li>
 </ul>
 <p>Here is an example of how to use the command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; hydromt build wflow /path/to/model_root -i /path/to/wflow_build_config.yml  -d deltares_data  -v</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; hydromt build wflow_sbm /path/to/model_root -i /path/to/wflow_build_config.yml  -d deltares_data  -v</span>
 </pre></div>
 </div>
 <p>You can find more information on the steps to build a model in the <a class="reference internal" href="model_build.html#model-build"><span class="std std-ref">Building a model</span></a> section.
@@ -585,7 +585,7 @@ the data catalog, and other options. The most important ones are:</p>
 <li><p><cite>-o, --model-out</cite>: Relative or absolute path to the output folder of the updated model. If not provided, the current model will be overwritten.</p></li>
 </ul>
 <p>Here is an example of how to use the command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; hydromt update wflow /path/to/model_to_update -o /path/to/updated_model -i /path/to/wflow_update_config.yml -d /path/to/data_catalog.yml -v</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; hydromt update wflow_sbm /path/to/model_to_update -o /path/to/updated_model -i /path/to/wflow_update_config.yml -d /path/to/data_catalog.yml -v</span>
 </pre></div>
 </div>
 <p>You can find more information on the steps to update a model in the <a class="reference internal" href="model_update.html#model-update"><span class="std std-ref">Updating a model</span></a> section.
@@ -645,29 +645,28 @@ For the region, only the <cite>bbox</cite> and <cite>geom</cite> types are suppo
 </section>
 <section id="check-command">
 <h2>Check command<a class="headerlink" href="#check-command" title="Link to this heading">#</a></h2>
-<p>The <strong>hydromt check</strong> command is used to validate the configuration file, the data catalog, and the region.
+<p>The <strong>hydromt check</strong> command is used to validate the configuration file, and the data catalog.
 It can be useful to validate files before running other command lines to avoid errors. Please note that it
 will only check the syntax of the files provided. The actual data or calculations referenced will not be checked,
 loaded or performed.</p>
 <p>The command does not have any required arguments but several options that you can choose from:</p>
 <ul class="simple">
-<li><p><cite>-m, --model</cite>: The name of the model to validate. The available models can be printed using the <cite>hydromt --models</cite> command.</p></li>
-<li><p><cite>-i, --config</cite>: Relative or absolute path to the HydroMT configuration file to validate.</p></li>
-<li><p><cite>-d, --data</cite>: Relative or absolute path to the local yaml data catalog file or name of a predefined data catalog to validate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-m,</span> <span class="pre">--model</span></code>: The name of the model to validate. The available models can be printed using the <code class="docutils literal notranslate"><span class="pre">hydromt</span> <span class="pre">--models</span></code> command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-i,</span> <span class="pre">--config</span></code>: Relative or absolute path to the HydroMT configuration file to validate. Note that hydromt v1 cannot validate v0 config files, and vice versa.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-d,</span> <span class="pre">--data</span></code>: Relative or absolute path to the local yaml data catalog file or name of a predefined data catalog to validate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--format</span></code> specify which format of data catalog to validate. Accepted options are <code class="docutils literal notranslate"><span class="pre">v0</span></code> or <code class="docutils literal notranslate"><span class="pre">v1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--upgrade</span></code> when validating <code class="docutils literal notranslate"><span class="pre">v0</span></code> data catalogs you can supply the <code class="docutils literal notranslate"><span class="pre">--upgrade</span></code> flag, and hydromt will convert the data catalog to the <code class="docutils literal notranslate"><span class="pre">v1</span></code> format and write it to a file with the same name but with the suffix <code class="docutils literal notranslate"><span class="pre">_v1</span></code> added to the file stem.</p></li>
 </ul>
-<p>If you only wish to validate a region or a data catalog files, they can be run separately.
-Because configuration files are dependant on the model to build/update, to check a configuration file, you need to specify the model.</p>
 <p>Here are some examples of how to use the command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; hydromt check -m wflow -i /path/to/wflow_config.yml -d /path/to/data_catalog.yml -v</span>
 
-<span class="go">&gt; hydromt check -d /path/to/data_catalog.yml -v</span>
+<span class="go">&gt; hydromt check -d /path/to/data_catalog.yml --format v0 --upgrade -v</span>
 
 <span class="go">&gt; hydromt check -m wflow -i /path/to/wflow_config.yml -v</span>
 </pre></div>
 </div>
 <p>The validation is so far limited:</p>
 <ul class="simple">
-<li><p>region: full validation is only supported for the <cite>bbox</cite> and <cite>geom</cite> types. For other type, it will only check if the type is supported but will not validate the region itself.</p></li>
 <li><p>data catalog: only the format and options are validated but it does not try to load any of the data.</p></li>
 <li><p>configuration file: it will check if the methods exists and if the correct arguments are called. No validation is done on the content and type of the arguments themselves.</p></li>
 </ul>
@@ -792,7 +791,7 @@ Because configuration files are dependant on the model to build/update, to check
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>

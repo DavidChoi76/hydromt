@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>hydromt.model.components.MeshComponent.create_2d_from_region &#8212; HydroMT  documentation</title>
+    <title>hydromt.gis.raster_utils.merge &#8212; HydroMT  documentation</title>
   
   
   
@@ -41,26 +41,26 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/hydromt.model.components.MeshComponent.create_2d_from_region';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_generated/hydromt.gis.raster_utils.merge';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/Deltares/hydromt/gh-pages/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.1.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.2.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
     <link rel="icon" href="../_static/hydromt-icon.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="hydromt.model.components.MeshComponent.add_2d_data_from_rasterdataset" href="hydromt.model.components.MeshComponent.add_2d_data_from_rasterdataset.html" />
-    <link rel="prev" title="hydromt.model.components.MeshComponent.read" href="hydromt.model.components.MeshComponent.read.html" />
+    <link rel="next" title="hydromt.gis.raster_utils.spread2d" href="hydromt.gis.raster_utils.spread2d.html" />
+    <link rel="prev" title="hydromt.gis.raster_utils.full_from_transform" href="hydromt.gis.raster_utils.full_from_transform.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="1.1.0.dev0" />
+  <meta name="docsearch:version" content="1.2.0.dev0" />
   </head>
   
   
@@ -433,6 +433,7 @@
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.predefined_catalogs.html">hydromt.data_catalog.DataCatalog.predefined_catalogs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.to_dict.html">hydromt.data_catalog.DataCatalog.to_dict</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.to_yml.html">hydromt.data_catalog.DataCatalog.to_yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.to_stac_catalog.html">hydromt.data_catalog.DataCatalog.to_stac_catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.export_data.html">hydromt.data_catalog.DataCatalog.export_data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.get_source_bbox.html">hydromt.data_catalog.DataCatalog.get_source_bbox</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.get_source_time_range.html">hydromt.data_catalog.DataCatalog.get_source_time_range</a></li>
@@ -441,6 +442,7 @@
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.from_predefined_catalogs.html">hydromt.data_catalog.DataCatalog.from_predefined_catalogs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.from_yml.html">hydromt.data_catalog.DataCatalog.from_yml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.from_dict.html">hydromt.data_catalog.DataCatalog.from_dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.from_stac_catalog.html">hydromt.data_catalog.DataCatalog.from_stac_catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.get_rasterdataset.html">hydromt.data_catalog.DataCatalog.get_rasterdataset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.get_geodataset.html">hydromt.data_catalog.DataCatalog.get_geodataset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.DataCatalog.get_geodataframe.html">hydromt.data_catalog.DataCatalog.get_geodataframe</a></li>
@@ -515,13 +517,13 @@
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.drivers.DatasetXarrayDriver.html">hydromt.data_catalog.drivers.DatasetXarrayDriver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.drivers.DatasetXarrayDriver.read.html">hydromt.data_catalog.drivers.DatasetXarrayDriver.read</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.drivers.DatasetXarrayDriver.write.html">hydromt.data_catalog.drivers.DatasetXarrayDriver.write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.drivers.preprocessing.harmonise_dims.html">hydromt.data_catalog.drivers.preprocessing.harmonise_dims</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.drivers.preprocessing.remove_duplicates.html">hydromt.data_catalog.drivers.preprocessing.remove_duplicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.drivers.preprocessing.round_latlon.html">hydromt.data_catalog.drivers.preprocessing.round_latlon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.data_catalog.drivers.preprocessing.to_datetimeindex.html">hydromt.data_catalog.drivers.preprocessing.to_datetimeindex</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api/gis.html">GIS methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.raster.full.html">hydromt.gis.raster.full</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.raster.full_like.html">hydromt.gis.raster.full_like</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.raster.full_from_transform.html">hydromt.gis.raster.full_from_transform</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.raster_merge.merge.html">hydromt.gis.raster_merge.merge</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../api/gis.html">GIS methods</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.DataArray.raster.from_numpy.html">hydromt.gis.DataArray.raster.from_numpy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.Dataset.raster.from_numpy.html">hydromt.gis.Dataset.raster.from_numpy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.DataArray.raster.attrs.html">hydromt.gis.DataArray.raster.attrs</a></li>
@@ -580,6 +582,12 @@
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.DataArray.raster.zonal_stats.html">hydromt.gis.DataArray.raster.zonal_stats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.DataArray.raster.to_raster.html">hydromt.gis.DataArray.raster.to_raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.Dataset.raster.to_mapstack.html">hydromt.gis.Dataset.raster.to_mapstack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.raster_utils.cellres.html">hydromt.gis.raster_utils.cellres</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.raster_utils.full.html">hydromt.gis.raster_utils.full</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.raster_utils.full_like.html">hydromt.gis.raster_utils.full_like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.raster_utils.full_from_transform.html">hydromt.gis.raster_utils.full_from_transform</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">hydromt.gis.raster_utils.merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.raster_utils.spread2d.html">hydromt.gis.raster_utils.spread2d</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.DataArray.vector.from_gdf.html">hydromt.gis.DataArray.vector.from_gdf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.DataArray.vector.to_gdf.html">hydromt.gis.DataArray.vector.to_gdf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.DataArray.vector.from_netcdf.html">hydromt.gis.DataArray.vector.from_netcdf</a></li>
@@ -646,9 +654,35 @@
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.flw.outlet_map.html">hydromt.gis.flw.outlet_map</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.flw.clip_basins.html">hydromt.gis.flw.clip_basins</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.gis.flw.dem_adjust.html">hydromt.gis.flw.dem_adjust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.gis_utils.parse_crs.html">hydromt.gis.gis_utils.parse_crs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.gis_utils.utm_crs.html">hydromt.gis.gis_utils.utm_crs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.gis_utils.zoom_to_overview_level.html">hydromt.gis.gis_utils.zoom_to_overview_level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.vector_utils.nearest_merge.html">hydromt.gis.vector_utils.nearest_merge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.gis.vector_utils.nearest.html">hydromt.gis.vector_utils.nearest</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../api/model.html">Model</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/io.html">Reading and writing files</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_geodataset.html">hydromt.io.open_geodataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_mfcsv.html">hydromt.io.open_mfcsv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_mfraster.html">hydromt.io.open_mfraster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_nc.html">hydromt.io.open_nc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_ncs.html">hydromt.io.open_ncs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_raster.html">hydromt.io.open_raster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_raster_from_tindex.html">hydromt.io.open_raster_from_tindex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_timeseries_from_table.html">hydromt.io.open_timeseries_from_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_vector.html">hydromt.io.open_vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.open_vector_from_table.html">hydromt.io.open_vector_from_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.read_toml.html">hydromt.io.read_toml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.read_workflow_yaml.html">hydromt.io.read_workflow_yaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.read_yaml.html">hydromt.io.read_yaml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.write_nc.html">hydromt.io.write_nc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.write_region.html">hydromt.io.write_region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.write_toml.html">hydromt.io.write_toml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.write_xy.html">hydromt.io.write_xy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hydromt.io.write_yaml.html">hydromt.io.write_yaml</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/model.html">Model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.Model.html">hydromt.model.Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.Model.read.html">hydromt.model.Model.read</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.Model.write.html">hydromt.model.Model.write</a></li>
@@ -749,11 +783,6 @@
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.data.html">hydromt.model.components.GridComponent.data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.write.html">hydromt.model.components.GridComponent.write</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.read.html">hydromt.model.components.GridComponent.read</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.create_from_region.html">hydromt.model.components.GridComponent.create_from_region</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.add_data_from_constant.html">hydromt.model.components.GridComponent.add_data_from_constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.add_data_from_rasterdataset.html">hydromt.model.components.GridComponent.add_data_from_rasterdataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.add_data_from_raster_reclass.html">hydromt.model.components.GridComponent.add_data_from_raster_reclass</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.add_data_from_geodataframe.html">hydromt.model.components.GridComponent.add_data_from_geodataframe</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.set.html">hydromt.model.components.GridComponent.set</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.GridComponent.test_equal.html">hydromt.model.components.GridComponent.test_equal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.MeshComponent.html">hydromt.model.components.MeshComponent</a></li>
@@ -770,9 +799,6 @@
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.MeshComponent.mesh_gdf.html">hydromt.model.components.MeshComponent.mesh_gdf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.MeshComponent.write.html">hydromt.model.components.MeshComponent.write</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.MeshComponent.read.html">hydromt.model.components.MeshComponent.read</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">hydromt.model.components.MeshComponent.create_2d_from_region</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.MeshComponent.add_2d_data_from_rasterdataset.html">hydromt.model.components.MeshComponent.add_2d_data_from_rasterdataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.MeshComponent.add_2d_data_from_raster_reclass.html">hydromt.model.components.MeshComponent.add_2d_data_from_raster_reclass</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.MeshComponent.set.html">hydromt.model.components.MeshComponent.set</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.MeshComponent.get_mesh.html">hydromt.model.components.MeshComponent.get_mesh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hydromt.model.components.VectorComponent.html">hydromt.model.components.VectorComponent</a></li>
@@ -916,9 +942,9 @@
     <li class="breadcrumb-item"><a href="../api/api.html" class="nav-link">API reference</a></li>
     
     
-    <li class="breadcrumb-item"><a href="../api/model.html" class="nav-link">Model</a></li>
+    <li class="breadcrumb-item"><a href="../api/gis.html" class="nav-link">GIS methods</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">hydromt.model.components.MeshComponent.create_2d_from_region</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">hydromt.gis.raster_utils.merge</span></li>
   </ul>
 </nav>
 </div>
@@ -935,47 +961,44 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="hydromt-model-components-meshcomponent-create-2d-from-region">
-<h1>hydromt.model.components.MeshComponent.create_2d_from_region<a class="headerlink" href="#hydromt-model-components-meshcomponent-create-2d-from-region" title="Link to this heading">#</a></h1>
-<dl class="py method">
-<dt class="sig sig-object py" id="hydromt.model.components.MeshComponent.create_2d_from_region">
-<span class="sig-prename descclassname"><span class="pre">MeshComponent.</span></span><span class="sig-name descname"><span class="pre">create_2d_from_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region_crs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4326</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mesh2d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">UgridDataset</span></span></span><a class="reference internal" href="../_modules/hydromt/model/components/mesh.html#MeshComponent.create_2d_from_region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hydromt.model.components.MeshComponent.create_2d_from_region" title="Link to this definition">#</a></dt>
-<dd><p>HYDROMT CORE METHOD: Create an 2D unstructured mesh or reads an existing 2D mesh according UGRID conventions.</p>
-<p>Grids are read according to UGRID conventions. An 2D unstructured mesh
-will be created as 2D rectangular grid from a geometry (geom_filename) or bbox.
-If an existing 2D mesh is given, then no new mesh will be generated but an extent
-can be extracted using the <cite>bounds</cite> argument of region.</p>
-<p>Note Only existing meshed with only 2D grid can be read.</p>
+  <section id="hydromt-gis-raster-utils-merge">
+<h1>hydromt.gis.raster_utils.merge<a class="headerlink" href="#hydromt-gis-raster-utils-merge" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="hydromt.gis.raster_utils.merge">
+<span class="sig-prename descclassname"><span class="pre">hydromt.gis.raster_utils.</span></span><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_arrays</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_crs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst_res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'first'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hydromt/gis/raster_utils.html#merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hydromt.gis.raster_utils.merge" title="Link to this definition">#</a></dt>
+<dd><p>Merge multiple tiles to a single DataArray.</p>
+<p>If mismatching grid CRS or resolution, tiles are reprojected
+to match the output DataArray grid. If no destination
+grid is defined it is based on the first DataArray in the list.</p>
+<p>Based on <code class="xref py py-meth docutils literal notranslate"><span class="pre">rasterio.merge.merge()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – <p>Dictionary describing region of interest, bounds can be provided for type ‘mesh’.
-In case of ‘mesh’, if the file includes several grids, the specific 2D grid can
-be selected using the ‘grid_name’ argument.
-CRS for ‘bbox’ and ‘bounds’ should be 4326; e.g.:</p>
+<li><p><strong>data_arrays</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2025.10.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>) – Tiles to merge</p></li>
+<li><p><strong>dst_crs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">pyproj.CRS</span></code>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – CRS (or EPSG code) of destination grid</p></li>
+<li><p><strong>dst_bounds</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Bounding box [xmin, ymin, xmax, ymax] of destination grid</p></li>
+<li><p><strong>dst_res</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Resolution of destination grid</p></li>
+<li><p><strong>align</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>optional</em>) – If True, align grid with dst_res</p></li>
+<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">geopands.GeoDataFrame</span></code>, <em>optional</em>) – Mask of destination area of interest.
+Used to determine dst_crs, dst_bounds and dst_res if missing.</p></li>
+<li><p><strong>merge_method</strong> (<code class="docutils literal notranslate"><span class="pre">{'first','last','min','max','new'}</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">callable</span></code>) – <p>Merge method:</p>
 <ul>
-<li><p>{‘bbox’: [xmin, ymin, xmax, ymax]}</p></li>
-<li><p>{‘geom’: ‘path/to/polygon_geometry’}</p></li>
-<li><p>{‘mesh’: ‘path/to/2dmesh_file’}</p></li>
-<li><p>{‘mesh’: ‘path/to/mesh_file’, ‘grid_name’: ‘mesh2d’, ‘bounds’: [xmin, ymin, xmax, ymax]}</p></li>
+<li><p>first: reverse painting</p></li>
+<li><p>last: paint valid new on top of existing</p></li>
+<li><p>min: pixel-wise min of existing and new</p></li>
+<li><p>max: pixel-wise max of existing and new</p></li>
+<li><p>new: assert no pixel overlap</p></li>
 </ul>
 </p></li>
-<li><p><strong>res</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <em>optional</em>) – Resolution used to generate 2D mesh [unit of the CRS], required if region
-is not based on ‘mesh’.</p></li>
-<li><p><strong>crs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <em>optional</em>) – Optional EPSG code of the model.
-If None using the one from region, and else 4326.</p></li>
-<li><p><strong>region_crs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <em>optional</em>) – EPSG code of the region geometry, by default None. Only applies if region is
-of kind ‘bbox’or if geom crs is not defined in the file itself.</p></li>
-<li><p><strong>align</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <em>default</em> <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>) – Align the mesh to the resolution.
-Required for ‘bbox’ and ‘geom’ region types.</p></li>
-<li><p><strong>grid_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <em>optional</em>) – Name of the 2D grid in the mesh, by default ‘mesh2d’.</p></li>
+<li><p><strong>**kwargs</strong> – Key-word arguments passed to
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">reproject()</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>mesh2d</strong> – Generated mesh2d.</p>
+<dd class="field-even"><p><strong>da_out</strong> – Merged tiles.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xu.UgridDataset</span></code></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2025.10.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -993,20 +1016,20 @@ Required for ‘bbox’ and ‘geom’ region types.</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="hydromt.model.components.MeshComponent.read.html"
+       href="hydromt.gis.raster_utils.full_from_transform.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">hydromt.model.components.MeshComponent.read</p>
+        <p class="prev-next-title">hydromt.gis.raster_utils.full_from_transform</p>
       </div>
     </a>
     <a class="right-next"
-       href="hydromt.model.components.MeshComponent.add_2d_data_from_rasterdataset.html"
+       href="hydromt.gis.raster_utils.spread2d.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">hydromt.model.components.MeshComponent.add_2d_data_from_rasterdataset</p>
+        <p class="prev-next-title">hydromt.gis.raster_utils.spread2d</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1029,7 +1052,7 @@ Required for ‘bbox’ and ‘geom’ region types.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydromt.model.components.MeshComponent.create_2d_from_region"><code class="docutils literal notranslate"><span class="pre">MeshComponent.create_2d_from_region()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydromt.gis.raster_utils.merge"><code class="docutils literal notranslate"><span class="pre">merge()</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -1037,7 +1060,7 @@ Required for ‘bbox’ and ‘geom’ region types.</p></li>
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/Deltares/hydromt/edit/main/docs/_generated/hydromt.model.components.MeshComponent.create_2d_from_region.rst">
+    <a href="https://github.com/Deltares/hydromt/edit/main/docs/_generated/hydromt.gis.raster_utils.merge.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -1053,7 +1076,7 @@ Required for ‘bbox’ and ‘geom’ region types.</p></li>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/_generated/hydromt.model.components.MeshComponent.create_2d_from_region.rst.txt"
+      <li><a href="../_sources/_generated/hydromt.gis.raster_utils.merge.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>
@@ -1092,7 +1115,7 @@ Required for ‘bbox’ and ‘geom’ region types.</p></li>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>

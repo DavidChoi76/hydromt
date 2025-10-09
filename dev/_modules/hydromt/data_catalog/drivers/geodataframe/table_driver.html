@@ -40,7 +40,7 @@
 <link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -48,7 +48,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/Deltares/hydromt/gh-pages/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.1.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.2.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -57,7 +57,7 @@
     <link rel="search" title="Search" href="../../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="1.1.0.dev0" />
+  <meta name="docsearch:version" content="1.2.0.dev0" />
   </head>
   
   
@@ -458,20 +458,18 @@
   <h1>Source code for hydromt.data_catalog.drivers.geodataframe.table_driver</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Driver for reading in GeoDataFrames from tabular formats.&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span><span class="p">,</span> <span class="n">getLogger</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyproj</span><span class="w"> </span><span class="kn">import</span> <span class="n">CRS</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt._typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Geom</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt._typing.error</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoDataStrategy</span><span class="p">,</span> <span class="n">exec_nodata_strat</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hydromt._typing.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">SourceMetadata</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt._utils.unused_kwargs</span><span class="w"> </span><span class="kn">import</span> <span class="n">_warn_on_unused_kwargs</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.data_catalog.drivers.geodataframe.geodataframe_driver</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">GeoDataFrameDriver</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.error</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoDataStrategy</span><span class="p">,</span> <span class="n">exec_nodata_strat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.io.readers</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_vector_from_table</span>
 
 <span class="n">logger</span><span class="p">:</span> <span class="n">Logger</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -483,9 +481,25 @@
 <div class="viewcode-block" id="GeoDataFrameTableDriver">
 <a class="viewcode-back" href="../../../../../_generated/hydromt.data_catalog.drivers.GeoDataFrameTableDriver.html#hydromt.data_catalog.drivers.GeoDataFrameTableDriver">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GeoDataFrameTableDriver</span><span class="p">(</span><span class="n">GeoDataFrameDriver</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Driver for reading in GeoDataFrames from tabular formats.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Driver for GeoDataFrame from tabular formats: ``geodataframe_table``.</span>
+
+<span class="sd">    Supports reading point geometries from csv, excel (xls, xlsx), and parquet files</span>
+<span class="sd">    using a combination of the pandas and geopandas libraries.</span>
+
+<span class="sd">    Driver **options** include:</span>
+
+<span class="sd">    * x_dim: Optional[str], name of the column containing the x coordinate. Not needed</span>
+<span class="sd">      if one of the default names is used (&#39;x&#39;, &#39;longitude&#39;, &#39;lon&#39;, &#39;long&#39;).</span>
+<span class="sd">    * y_dim: Optional[str], name of the column containing the y coordinate. Not needed</span>
+<span class="sd">      if one of the default names is used (&#39;y&#39;, &#39;latitude&#39;, &#39;lat&#39;).</span>
+<span class="sd">    * Any other option supported by the underlying pandas read functions,</span>
+<span class="sd">      e.g. `pd.read_csv`, `pd.read_excel`, `pd.read_parquet`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;geodataframe_table&quot;</span>
+    <span class="n">SUPPORTED_EXTENSIONS</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;.xlsx&quot;</span><span class="p">,</span> <span class="s2">&quot;.xls&quot;</span><span class="p">,</span> <span class="s2">&quot;.parquet&quot;</span><span class="p">}</span>
 
 <div class="viewcode-block" id="GeoDataFrameTableDriver.read">
 <a class="viewcode-back" href="../../../../../_generated/hydromt.data_catalog.drivers.GeoDataFrameTableDriver.read.html#hydromt.data_catalog.drivers.GeoDataFrameTableDriver.read">[docs]</a>
@@ -493,19 +507,13 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">uris</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">mask</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Geom</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">predicate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;intersects&quot;</span><span class="p">,</span>
-        <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SourceMetadata</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">handle_nodata</span><span class="p">:</span> <span class="n">NoDataStrategy</span> <span class="o">=</span> <span class="n">NoDataStrategy</span><span class="o">.</span><span class="n">RAISE</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read tabular data using a combination of the pandas and geopandas libraries.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">metadata</span><span class="p">:</span>
             <span class="n">metadata</span> <span class="o">=</span> <span class="n">SourceMetadata</span><span class="p">()</span>
-        <span class="n">_warn_on_unused_kwargs</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-            <span class="p">{</span><span class="s2">&quot;mask&quot;</span><span class="p">:</span> <span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;predicate&quot;</span><span class="p">:</span> <span class="n">predicate</span><span class="p">,</span> <span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="n">variables</span><span class="p">},</span>
-        <span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uris</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;DataFrame: Reading multiple files with the &quot;</span>
@@ -514,11 +522,15 @@
 
         <span class="n">_uri</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">uris</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="n">gdf</span> <span class="o">=</span> <span class="n">_open_vector_from_table</span><span class="p">(</span>
-            <span class="n">uri</span><span class="o">=</span><span class="n">_uri</span><span class="p">,</span>
-            <span class="n">x_dim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;x_dim&quot;</span><span class="p">),</span>
-            <span class="n">y_dim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;y_dim&quot;</span><span class="p">),</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">x_dim</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;x_dim&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">y_dim</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;y_dim&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">gdf</span> <span class="o">=</span> <span class="n">open_vector_from_table</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">_uri</span><span class="p">,</span>
+            <span class="n">x_dim</span><span class="o">=</span><span class="n">x_dim</span><span class="p">,</span>
+            <span class="n">y_dim</span><span class="o">=</span><span class="n">y_dim</span><span class="p">,</span>
             <span class="n">crs</span><span class="o">=</span><span class="n">metadata</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">options</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">gdf</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">exec_nodata_strat</span><span class="p">(</span>
@@ -528,70 +540,6 @@
         <span class="k">return</span> <span class="n">gdf</span></div>
 </div>
 
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_open_vector_from_table</span><span class="p">(</span>
-    <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">x_dim</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">y_dim</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">crs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CRS</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Read point geometry files from csv, parquet, xy or excel table files.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    x_dim, y_dim: str</span>
-<span class="sd">        Name of x, y column. By default the x-column header should be one of</span>
-<span class="sd">        [&#39;x&#39;, &#39;longitude&#39;, &#39;lon&#39;, &#39;long&#39;], and y-column header one of</span>
-<span class="sd">        [&#39;y&#39;, &#39;latitude&#39;, &#39;lat&#39;]. For xy files, which don&#39;t have a header,</span>
-<span class="sd">        the first column is interpreted as x and the second as y column.</span>
-<span class="sd">    crs: int, dict, or str, optional</span>
-<span class="sd">        Coordinate reference system, accepts EPSG codes (int or str), proj (str or dict)</span>
-<span class="sd">        or wkt (str)</span>
-<span class="sd">    **kwargs</span>
-<span class="sd">        Additional keyword arguments that are passed to the underlying drivers.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    gdf: geopandas.GeoDataFrame</span>
-<span class="sd">        Parsed and filtered point geometries</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">uri</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="k">if</span> <span class="s2">&quot;index_col&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="ow">and</span> <span class="n">ext</span> <span class="o">!=</span> <span class="s2">&quot;parquet&quot;</span><span class="p">:</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s2">&quot;csv&quot;</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">ext</span> <span class="o">==</span> <span class="s2">&quot;parquet&quot;</span><span class="p">:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;xls&quot;</span><span class="p">,</span> <span class="s2">&quot;xlsx&quot;</span><span class="p">]:</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;openpyxl&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Extension &#39;</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&#39; not compatible with geodataframe table driver&quot;</span>
-        <span class="p">)</span>
-
-    <span class="c1"># Make columns case insensitive</span>
-    <span class="n">columns</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">col</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
-    <span class="n">columns</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">col</span><span class="p">:</span> <span class="n">col</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
-
-    <span class="k">if</span> <span class="n">x_dim</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">X_DIM_LABELS</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
-                <span class="n">x_dim</span> <span class="o">=</span> <span class="n">dim</span>
-                <span class="k">break</span>
-    <span class="k">if</span> <span class="n">x_dim</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">x_dim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x dimension &quot;</span><span class="si">{</span><span class="n">x_dim</span><span class="si">}</span><span class="s1">&quot; not found in columns: </span><span class="si">{</span><span class="n">columns</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">y_dim</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">Y_DIM_LABELS</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-                <span class="n">y_dim</span> <span class="o">=</span> <span class="n">dim</span>
-                <span class="k">break</span>
-    <span class="k">if</span> <span class="n">y_dim</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y_dim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;y dimension &quot;</span><span class="si">{</span><span class="n">y_dim</span><span class="si">}</span><span class="s1">&quot; not found in columns: </span><span class="si">{</span><span class="n">columns</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
-    <span class="n">points</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x_dim</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">y_dim</span><span class="p">])</span>
-    <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">x_dim</span><span class="p">,</span> <span class="n">y_dim</span><span class="p">]),</span> <span class="n">geometry</span><span class="o">=</span><span class="n">points</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">gdf</span>
 </pre></div>
 
                 </article>
@@ -642,7 +590,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>

@@ -40,7 +40,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -48,7 +48,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/Deltares/hydromt/gh-pages/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.1.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.2.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -57,7 +57,7 @@
     <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="1.1.0.dev0" />
+  <meta name="docsearch:version" content="1.2.0.dev0" />
   </head>
   
   
@@ -458,28 +458,19 @@
   <h1>Source code for hydromt.model.components.mesh</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Mesh Component.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span><span class="p">,</span> <span class="n">getLogger</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">os.path</span><span class="w"> </span><span class="kn">import</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">isdir</span><span class="p">,</span> <span class="n">join</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">xugrid</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xu</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyproj</span><span class="w"> </span><span class="kn">import</span> <span class="n">CRS</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">box</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt._io.readers</span><span class="w"> </span><span class="kn">import</span> <span class="n">_read_nc</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.gis.raster</span><span class="w"> </span><span class="kn">import</span> <span class="n">GEO_MAP_COORD</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.io.readers</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_ncs</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.model.components.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelComponent</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.model.components.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">SpatialModelComponent</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.model.processes.mesh</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">create_mesh2d_from_region</span><span class="p">,</span>
-    <span class="n">mesh2d_from_raster_reclass</span><span class="p">,</span>
-    <span class="n">mesh2d_from_rasterdataset</span><span class="p">,</span>
-<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hydromt.model.steps</span><span class="w"> </span><span class="kn">import</span> <span class="n">hydromt_step</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
@@ -569,7 +560,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_initialize</span><span class="p">()</span>
         <span class="c1"># Checks on data</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">_check_ugrid</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_ugrid</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
         <span class="c1"># Checks on grid topology</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">ugrid</span><span class="o">.</span><span class="n">grids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -590,7 +581,6 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">region_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">write_optional_ugrid_attributes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -605,36 +595,32 @@
 <span class="sd">        write_optional_ugrid_attributes : bool, optional</span>
 <span class="sd">            If True, write optional ugrid attributes to the netCDF file, by default</span>
 <span class="sd">            True.</span>
-<span class="sd">        region_options : dict, optional</span>
-<span class="sd">            Options to pass to the write_region method.</span>
-<span class="sd">            Can contain `filename`, `to_wgs84`, and anything that will be passed to `GeoDataFrame.to_file`.</span>
-<span class="sd">            If `filename` is not provided, `self.region_filename` will be used.</span>
 <span class="sd">        **kwargs : dict</span>
 <span class="sd">            Additional keyword arguments to be passed to the</span>
 <span class="sd">            `xarray.Dataset.to_netcdf` method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">_assert_write_mode</span><span class="p">()</span>
-        <span class="n">region_options</span> <span class="o">=</span> <span class="n">region_options</span> <span class="ow">or</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">write_region</span><span class="p">(</span><span class="o">**</span><span class="n">region_options</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No mesh data found, skip writing.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name_in_model</span><span class="si">}</span><span class="s2">: No mesh data found, skip writing.&quot;</span>
+            <span class="p">)</span>
             <span class="k">return</span>
 
-        <span class="c1"># filename</span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
-        <span class="n">_filename</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">isdir</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">_filename</span><span class="p">)):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">_filename</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Writing file </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span>
+        <span class="n">full_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="n">filename</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name_in_model</span><span class="si">}</span><span class="s2">: Writing mesh to </span><span class="si">{</span><span class="n">full_path</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+        <span class="n">full_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
         <span class="n">ds_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ugrid</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">(</span>
             <span class="n">optional_attributes</span><span class="o">=</span><span class="n">write_optional_ugrid_attributes</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># save crs to spatial_ref coordinate</span>
             <span class="n">ds_out</span> <span class="o">=</span> <span class="n">ds_out</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">write_crs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
-        <span class="n">ds_out</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">_filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">write_region</span><span class="p">()</span></div>
+        <span class="n">ds_out</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">full_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="MeshComponent.read">
@@ -649,7 +635,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Read model mesh data at &lt;root&gt;/&lt;filename&gt; and add to mesh property.</span>
 
-<span class="sd">        key-word arguments are passed to :py:meth:`~hydromt.model.Model.read_nc`</span>
+<span class="sd">        key-word arguments are passed to :py:meth:`~hydromt.model.Model.open_nc`</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -660,18 +646,14 @@
 <span class="sd">            spatial reference system of the mesh file. Only used if the CRS is not</span>
 <span class="sd">            found when reading the mesh file.</span>
 <span class="sd">        **kwargs : dict</span>
-<span class="sd">            Additional keyword arguments to be passed to the `read_nc` method.</span>
+<span class="sd">            Additional keyword arguments to be passed to the `open_nc` method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">_assert_read_mode</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_initialize</span><span class="p">(</span><span class="n">skip_read</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="p">)</span>
-        <span class="n">files</span> <span class="o">=</span> <span class="n">_read_nc</span><span class="p">(</span>
-            <span class="n">filename</span><span class="p">,</span>
-            <span class="n">root</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
-            <span class="n">single_var_as_array</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">open_ncs</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_open_datasets</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">rio</span><span class="o">.</span><span class="n">crs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># parse crs</span>
@@ -697,83 +679,6 @@
             <span class="n">uds</span><span class="o">.</span><span class="n">ugrid</span><span class="o">.</span><span class="n">set_crs</span><span class="p">(</span><span class="n">crs</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">uds</span></div>
-
-
-<div class="viewcode-block" id="MeshComponent.create_2d_from_region">
-<a class="viewcode-back" href="../../../../_generated/hydromt.model.components.MeshComponent.create_2d_from_region.html#hydromt.model.components.MeshComponent.create_2d_from_region">[docs]</a>
-    <span class="nd">@hydromt_step</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">create_2d_from_region</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">region</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
-        <span class="o">*</span><span class="p">,</span>
-        <span class="n">res</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">crs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">region_crs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4326</span><span class="p">,</span>
-        <span class="n">grid_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mesh2d&quot;</span><span class="p">,</span>
-        <span class="n">align</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataset</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;HYDROMT CORE METHOD: Create an 2D unstructured mesh or reads an existing 2D mesh according UGRID conventions.</span>
-
-<span class="sd">        Grids are read according to UGRID conventions. An 2D unstructured mesh</span>
-<span class="sd">        will be created as 2D rectangular grid from a geometry (geom_filename) or bbox.</span>
-<span class="sd">        If an existing 2D mesh is given, then no new mesh will be generated but an extent</span>
-<span class="sd">        can be extracted using the `bounds` argument of region.</span>
-
-<span class="sd">        Note Only existing meshed with only 2D grid can be read.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        region : dict</span>
-<span class="sd">            Dictionary describing region of interest, bounds can be provided for type &#39;mesh&#39;.</span>
-<span class="sd">            In case of &#39;mesh&#39;, if the file includes several grids, the specific 2D grid can</span>
-<span class="sd">            be selected using the &#39;grid_name&#39; argument.</span>
-<span class="sd">            CRS for &#39;bbox&#39; and &#39;bounds&#39; should be 4326; e.g.:</span>
-
-<span class="sd">            * {&#39;bbox&#39;: [xmin, ymin, xmax, ymax]}</span>
-<span class="sd">            * {&#39;geom&#39;: &#39;path/to/polygon_geometry&#39;}</span>
-<span class="sd">            * {&#39;mesh&#39;: &#39;path/to/2dmesh_file&#39;}</span>
-<span class="sd">            * {&#39;mesh&#39;: &#39;path/to/mesh_file&#39;, &#39;grid_name&#39;: &#39;mesh2d&#39;, &#39;bounds&#39;: [xmin, ymin, xmax, ymax]}</span>
-
-<span class="sd">        res : float, optional</span>
-<span class="sd">            Resolution used to generate 2D mesh [unit of the CRS], required if region</span>
-<span class="sd">            is not based on &#39;mesh&#39;.</span>
-<span class="sd">        crs : int, optional</span>
-<span class="sd">            Optional EPSG code of the model.</span>
-<span class="sd">            If None using the one from region, and else 4326.</span>
-<span class="sd">        region_crs : int, optional</span>
-<span class="sd">            EPSG code of the region geometry, by default None. Only applies if region is</span>
-<span class="sd">            of kind &#39;bbox&#39;or if geom crs is not defined in the file itself.</span>
-<span class="sd">        align : bool, default True</span>
-<span class="sd">            Align the mesh to the resolution.</span>
-<span class="sd">            Required for &#39;bbox&#39; and &#39;geom&#39; region types.</span>
-<span class="sd">        grid_name : str, optional</span>
-<span class="sd">            Name of the 2D grid in the mesh, by default &#39;mesh2d&#39;.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        mesh2d : xu.UgridDataset</span>
-<span class="sd">            Generated mesh2d.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Preparing 2D mesh.&quot;</span><span class="p">)</span>
-
-        <span class="c1"># Check if this component&#39;s region is a reference to another component</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_region_component</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Region is a reference to another component. Cannot create grid.&quot;</span>
-            <span class="p">)</span>
-
-        <span class="n">mesh2d</span> <span class="o">=</span> <span class="n">create_mesh2d_from_region</span><span class="p">(</span>
-            <span class="n">region</span><span class="p">,</span>
-            <span class="n">res</span><span class="o">=</span><span class="n">res</span><span class="p">,</span>
-            <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">,</span>
-            <span class="n">region_crs</span><span class="o">=</span><span class="n">region_crs</span><span class="p">,</span>
-            <span class="n">align</span><span class="o">=</span><span class="n">align</span><span class="p">,</span>
-            <span class="n">data_catalog</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_catalog</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">mesh2d</span><span class="p">,</span> <span class="n">grid_name</span><span class="o">=</span><span class="n">grid_name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">crs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_crs</span> <span class="o">=</span> <span class="n">crs</span>
-        <span class="k">return</span> <span class="n">mesh2d</span></div>
 
 
     <span class="nd">@property</span>
@@ -925,194 +830,6 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh_grids</span><span class="p">[</span><span class="n">grid_name</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="MeshComponent.add_2d_data_from_rasterdataset">
-<a class="viewcode-back" href="../../../../_generated/hydromt.model.components.MeshComponent.add_2d_data_from_rasterdataset.html#hydromt.model.components.MeshComponent.add_2d_data_from_rasterdataset">[docs]</a>
-    <span class="nd">@hydromt_step</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_2d_data_from_rasterdataset</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">raster_filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">],</span>
-        <span class="o">*</span><span class="p">,</span>
-        <span class="n">grid_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mesh2d&quot;</span><span class="p">,</span>
-        <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">fill_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">resampling_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;centroid&quot;</span><span class="p">,</span>
-        <span class="n">rename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;HYDROMT CORE METHOD: Add data variable(s) from ``raster_filename`` to 2D ``grid_name`` in mesh object.</span>
-
-<span class="sd">        Raster data is interpolated to the mesh ``grid_name`` using the ``resampling_method``.</span>
-<span class="sd">        If raster is a dataset, all variables will be added unless ``variables`` list</span>
-<span class="sd">        is specified.</span>
-
-<span class="sd">        Adds model layers:</span>
-
-<span class="sd">        * **raster.name** mesh: data from raster_filename</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        raster_filename: str, Path, xr.DataArray, xr.Dataset</span>
-<span class="sd">            Data catalog key, path to raster file or raster xarray data object.</span>
-<span class="sd">        grid_name: str</span>
-<span class="sd">            Name of the mesh grid to add the data to. By default &#39;mesh2d&#39;.</span>
-<span class="sd">        variables: list, optional</span>
-<span class="sd">            List of variables to add to mesh from raster_filename. By default all.</span>
-<span class="sd">        fill_method : str, optional</span>
-<span class="sd">            If specified, fills no data values using fill_nodata method.</span>
-<span class="sd">            Available methods are {&#39;linear&#39;, &#39;nearest&#39;, &#39;cubic&#39;, &#39;rio_idw&#39;}.</span>
-<span class="sd">        resampling_method: str, list, optional</span>
-<span class="sd">            Method to sample from raster data to mesh. By default mean. Options include</span>
-<span class="sd">            {&quot;centroid&quot;, &quot;barycentric&quot;, &quot;mean&quot;, &quot;harmonic_mean&quot;, &quot;geometric_mean&quot;, &quot;sum&quot;,</span>
-<span class="sd">            &quot;minimum&quot;, &quot;maximum&quot;, &quot;mode&quot;, &quot;median&quot;, &quot;max_overlap&quot;}. If centroid, will use</span>
-<span class="sd">            :py:meth:`xugrid.CentroidLocatorRegridder` method. If barycentric, will use</span>
-<span class="sd">            :py:meth:`xugrid.BarycentricInterpolator` method. If any other, will use</span>
-<span class="sd">            :py:meth:`xugrid.OverlapRegridder` method.</span>
-<span class="sd">            Can provide a list corresponding to ``variables``.</span>
-<span class="sd">        rename: dict, optional</span>
-<span class="sd">            Dictionary to rename variable names in raster_filename before adding to mesh</span>
-<span class="sd">            {&#39;name_in_raster_filename&#39;: &#39;name_in_mesh&#39;}. By default empty.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        list</span>
-<span class="sd">            List of variables added to mesh.</span>
-<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Preparing mesh data from raster source </span><span class="si">{</span><span class="n">raster_filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="c1"># Get the grid from the mesh or the reference one</span>
-        <span class="n">mesh_like</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_mesh_grid_data</span><span class="p">(</span><span class="n">grid_name</span><span class="o">=</span><span class="n">grid_name</span><span class="p">)</span>
-
-        <span class="c1"># Read raster data and select variables</span>
-        <span class="n">bounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_mesh_gdf_data</span><span class="p">(</span><span class="n">grid_name</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">total_bounds</span>
-        <span class="n">ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_catalog</span><span class="o">.</span><span class="n">get_rasterdataset</span><span class="p">(</span>
-            <span class="n">raster_filename</span><span class="p">,</span>
-            <span class="n">bbox</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span>
-            <span class="n">buffer</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">variables</span><span class="o">=</span><span class="n">variables</span><span class="p">,</span>
-            <span class="n">single_var_as_array</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="n">uds_sample</span> <span class="o">=</span> <span class="n">mesh2d_from_rasterdataset</span><span class="p">(</span>
-            <span class="n">ds</span><span class="o">=</span><span class="n">ds</span><span class="p">,</span>
-            <span class="n">mesh2d</span><span class="o">=</span><span class="n">mesh_like</span><span class="p">,</span>
-            <span class="n">variables</span><span class="o">=</span><span class="n">variables</span><span class="p">,</span>
-            <span class="n">fill_method</span><span class="o">=</span><span class="n">fill_method</span><span class="p">,</span>
-            <span class="n">resampling_method</span><span class="o">=</span><span class="n">resampling_method</span><span class="p">,</span>
-            <span class="n">rename</span><span class="o">=</span><span class="n">rename</span><span class="p">,</span>
-        <span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">uds_sample</span><span class="p">,</span> <span class="n">grid_name</span><span class="o">=</span><span class="n">grid_name</span><span class="p">,</span> <span class="n">overwrite_grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">uds_sample</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
-
-
-<div class="viewcode-block" id="MeshComponent.add_2d_data_from_raster_reclass">
-<a class="viewcode-back" href="../../../../_generated/hydromt.model.components.MeshComponent.add_2d_data_from_raster_reclass.html#hydromt.model.components.MeshComponent.add_2d_data_from_raster_reclass">[docs]</a>
-    <span class="nd">@hydromt_step</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_2d_data_from_raster_reclass</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">raster_filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">],</span>
-        <span class="n">reclass_table_filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
-        <span class="n">reclass_variables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-        <span class="n">grid_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mesh2d&quot;</span><span class="p">,</span>
-        <span class="n">variable</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">fill_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">resampling_method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="s2">&quot;centroid&quot;</span><span class="p">,</span>
-        <span class="n">rename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;HYDROMT CORE METHOD: Add data variable(s) to 2D ``grid_name`` in mesh object by reclassifying the data in ``raster_filename`` based on ``reclass_table_filename``.</span>
-
-<span class="sd">        The reclassified raster data</span>
-<span class="sd">        are subsequently interpolated to the mesh using `resampling_method`.</span>
-
-<span class="sd">        Adds model layers:</span>
-
-<span class="sd">        * **reclass_variables** mesh: reclassified raster data interpolated to the</span>
-<span class="sd">            model mesh</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        raster_filename : str, Path, xr.DataArray</span>
-<span class="sd">            Data catalog key, path to the raster file, or raster xarray data object.</span>
-<span class="sd">            Should be a DataArray. If not, use the `variable` argument for selection.</span>
-<span class="sd">        reclass_table_filename : str, Path, pd.DataFrame</span>
-<span class="sd">            Data catalog key, path to the tabular data file, or tabular pandas dataframe</span>
-<span class="sd">            object for the reclassification table of `raster_filename`.</span>
-<span class="sd">        reclass_variables : list</span>
-<span class="sd">            List of reclass_variables from the reclass_table_filename table to add to the</span>
-<span class="sd">            mesh. The index column should match values in raster_filename.</span>
-<span class="sd">        grid_name : str, optional</span>
-<span class="sd">            Name of the mesh grid to add the data to. By default &#39;mesh2d&#39;.</span>
-<span class="sd">        variable : str, optional</span>
-<span class="sd">            Name of the raster dataset variable to use. This is only required when</span>
-<span class="sd">            reading datasets with multiple variables. By default, None.</span>
-<span class="sd">        fill_method : str, optional</span>
-<span class="sd">            If specified, fills nodata values in `raster_filename` using the `fill_method`</span>
-<span class="sd">            method before reclassifying. Available methods are</span>
-<span class="sd">            {&#39;linear&#39;, &#39;nearest&#39;, &#39;cubic&#39;, &#39;rio_idw&#39;}.</span>
-<span class="sd">        resampling_method : str or list, optional</span>
-<span class="sd">            Method to sample from raster data to mesh. By default mean. Options include</span>
-<span class="sd">            {&quot;centroid&quot;, &quot;barycentric&quot;, &quot;mean&quot;, &quot;harmonic_mean&quot;, &quot;geometric_mean&quot;, &quot;sum&quot;,</span>
-<span class="sd">            &quot;minimum&quot;, &quot;maximum&quot;, &quot;mode&quot;, &quot;median&quot;, &quot;max_overlap&quot;}. If centroid, will use</span>
-<span class="sd">            :py:meth:`xugrid.CentroidLocatorRegridder` method. If barycentric, will use</span>
-<span class="sd">            :py:meth:`xugrid.BarycentricInterpolator` method. If any other, will use</span>
-<span class="sd">            :py:meth:`xugrid.OverlapRegridder` method.</span>
-<span class="sd">            Can provide a list corresponding to ``reclass_variables``.</span>
-<span class="sd">        rename : dict, optional</span>
-<span class="sd">            Dictionary to rename variable names in `reclass_variables` before adding</span>
-<span class="sd">            them to the mesh. The dictionary should have the form</span>
-<span class="sd">            {&#39;name_in_reclass_table&#39;: &#39;name_in_mesh&#39;}. By default, an empty dictionary.</span>
-<span class="sd">        **kwargs : dict</span>
-<span class="sd">            Additional keyword arguments to be passed to the raster dataset</span>
-<span class="sd">            retrieval method.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        variable_names : List[str]</span>
-<span class="sd">            List of added variable names in the mesh.</span>
-
-<span class="sd">        Raises</span>
-<span class="sd">        ------</span>
-<span class="sd">        ValueError</span>
-<span class="sd">            If `raster_filename` is not a single variable raster.</span>
-<span class="sd">        &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Preparing mesh data by reclassifying the data in </span><span class="si">{</span><span class="n">raster_filename</span><span class="si">}</span><span class="s2"> &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;based on </span><span class="si">{</span><span class="n">reclass_table_filename</span><span class="si">}</span><span class="s2">.&quot;</span>
-        <span class="p">)</span>
-        <span class="c1"># Get the grid from the mesh or the reference one</span>
-        <span class="n">mesh_like</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_mesh_grid_data</span><span class="p">(</span><span class="n">grid_name</span><span class="o">=</span><span class="n">grid_name</span><span class="p">)</span>
-        <span class="c1"># Read raster data and mapping table</span>
-        <span class="n">bounds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_mesh_gdf_data</span><span class="p">(</span><span class="n">grid_name</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">total_bounds</span>
-        <span class="n">da</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_catalog</span><span class="o">.</span><span class="n">get_rasterdataset</span><span class="p">(</span>
-            <span class="n">raster_filename</span><span class="p">,</span>
-            <span class="n">bbox</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span>
-            <span class="n">buffer</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">variables</span><span class="o">=</span><span class="n">variable</span><span class="p">,</span>
-            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;raster_filename </span><span class="si">{</span><span class="n">raster_filename</span><span class="si">}</span><span class="s2"> should be a single variable raster. &quot;</span>
-                <span class="s2">&quot;Please select one using the &#39;variable&#39; argument&quot;</span>
-            <span class="p">)</span>
-        <span class="n">df_vars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_catalog</span><span class="o">.</span><span class="n">get_dataframe</span><span class="p">(</span>
-            <span class="n">reclass_table_filename</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="n">reclass_variables</span>
-        <span class="p">)</span>
-
-        <span class="n">uds_sample</span> <span class="o">=</span> <span class="n">mesh2d_from_raster_reclass</span><span class="p">(</span>
-            <span class="n">da</span><span class="o">=</span><span class="n">da</span><span class="p">,</span>
-            <span class="n">df_vars</span><span class="o">=</span><span class="n">df_vars</span><span class="p">,</span>
-            <span class="n">mesh2d</span><span class="o">=</span><span class="n">mesh_like</span><span class="p">,</span>
-            <span class="n">reclass_variables</span><span class="o">=</span><span class="n">reclass_variables</span><span class="p">,</span>
-            <span class="n">fill_method</span><span class="o">=</span><span class="n">fill_method</span><span class="p">,</span>
-            <span class="n">resampling_method</span><span class="o">=</span><span class="n">resampling_method</span><span class="p">,</span>
-            <span class="n">rename</span><span class="o">=</span><span class="n">rename</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">uds_sample</span><span class="p">,</span> <span class="n">grid_name</span><span class="o">=</span><span class="n">grid_name</span><span class="p">,</span> <span class="n">overwrite_grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">uds_sample</span><span class="o">.</span><span class="n">data_vars</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
-
-
     <span class="k">def</span><span class="w"> </span><span class="nf">_add_mesh</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataset</span><span class="p">,</span> <span class="n">grid_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">overwrite_grid</span><span class="p">:</span> <span class="nb">bool</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CRS</span><span class="p">]:</span>
@@ -1199,6 +916,25 @@
             <span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">(</span><span class="n">optional_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         <span class="p">)</span>
 
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_ugrid</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">xu</span><span class="o">.</span><span class="n">UgridDataArray</span><span class="p">,</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataset</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataset</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">xu</span><span class="o">.</span><span class="n">UgridDataArray</span><span class="p">,</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataset</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;New mesh data in set_mesh should be of type xu.UgridDataArray&quot;</span>
+                <span class="s2">&quot; or xu.UgridDataset&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataArray</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Cannot set mesh from </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="si">}</span><span class="s2"> without a name.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">_get_mesh_grid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">xu</span><span class="o">.</span><span class="n">Ugrid1d</span><span class="p">,</span> <span class="n">xu</span><span class="o">.</span><span class="n">Ugrid2d</span><span class="p">]:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_region_component</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">reference_component</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_component</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_region_component</span><span class="p">)</span>
@@ -1239,25 +975,6 @@
                 <span class="sa">f</span><span class="s2">&quot;Grid &#39;</span><span class="si">{</span><span class="n">grid_name</span><span class="si">}</span><span class="s2">&#39; not found in mesh of &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_region_component</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
             <span class="p">)</span></div>
 
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">_check_ugrid</span><span class="p">(</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">xu</span><span class="o">.</span><span class="n">UgridDataArray</span><span class="p">,</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataset</span><span class="p">],</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataset</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">xu</span><span class="o">.</span><span class="n">UgridDataArray</span><span class="p">,</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataset</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;New mesh data in set_mesh should be of type xu.UgridDataArray&quot;</span>
-            <span class="s2">&quot; or xu.UgridDataset&quot;</span>
-        <span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">xu</span><span class="o">.</span><span class="n">UgridDataArray</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Cannot set mesh from </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="si">}</span><span class="s2"> without a name.&quot;</span>
-            <span class="p">)</span>
-        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">to_dataset</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">data</span>
 </pre></div>
 
                 </article>
@@ -1308,7 +1025,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>

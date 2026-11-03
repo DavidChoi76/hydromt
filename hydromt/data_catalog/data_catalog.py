@@ -1129,8 +1129,9 @@ class DataCatalog(object):
                                 map(
                                     lambda x: x[0],  # take param name
                                     filter(
-                                        lambda t: t[1].kind
-                                        == 3,  # 3 in enum is kw_only
+                                        lambda t: (
+                                            t[1].kind == 3
+                                        ),  # 3 in enum is kw_only
                                         inspect.signature(
                                             source.to_file
                                         ).parameters.items(),

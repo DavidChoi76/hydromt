@@ -53,9 +53,11 @@ class ConventionResolver(URIResolver):
         ) -> Iterable[str]:
             if pair[0] is not None:
                 return map(
-                    lambda uri: self.filesystem.unstrip_protocol(uri)
-                    if not uri.startswith(pair[0])
-                    else uri,
+                    lambda uri: (
+                        self.filesystem.unstrip_protocol(uri)
+                        if not uri.startswith(pair[0])
+                        else uri
+                    ),
                     pair[1],
                 )
             else:
